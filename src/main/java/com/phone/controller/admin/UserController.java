@@ -1,4 +1,4 @@
-package com.phone.controller;
+package com.phone.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -25,13 +25,13 @@ public class UserController {
 
 	 @GetMapping("/homepage")
 	 public String showHomePage() {
-		 return "index";
+		 return "admin/index";
 	 }
 	 
 	 @GetMapping("/addUser")
 	 public String showAddUserForm(Model model) {
 	     model.addAttribute("user", new User());
-	     return "add-user";
+	     return "admin/add-user";
 	 }
 	 
 	 @PostMapping("/saveUser")
