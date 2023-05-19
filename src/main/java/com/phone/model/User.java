@@ -43,6 +43,15 @@ public class User {
 		this.state = state;
 	}
 	
+	public User(String name, String email, String password, String phone, String address) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.address = address;
+	}
+	
 	//Getter and Setter
 	public int getId() {
 		return id;
