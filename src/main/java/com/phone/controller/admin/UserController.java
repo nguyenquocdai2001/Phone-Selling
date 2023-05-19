@@ -1,4 +1,4 @@
-package com.phone.controller;
+package com.phone.controller.admin;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -28,13 +28,13 @@ public class UserController {
 
 	 @GetMapping("/homepage")
 	 public String showHomePage() {
-		 return "index";
+		 return "admin/index";
 	 }
 	 
 	 @GetMapping("/addUser")
 	 public String showAddUserForm(Model model) {
 	     model.addAttribute("user", new User());
-	     return "add-user";
+	     return "admin/add-user";
 	 }
 	 
 	 @PostMapping("/checkRegister")
