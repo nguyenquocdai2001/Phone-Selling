@@ -24,16 +24,16 @@
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="./product">
+                        <a class="nav-link" href="./productandcategory">
                             <i class="nc-icon nc-notes"></i>
                             <p>Products List</p>
                         </a>
                     </li>
                  
                     <li>
-                        <a class="nav-link" href="./icons.html">
-                            <i class="nc-icon nc-atom"></i>
-                            <p>Icons</p>
+                        <a class="nav-link" href="./product">
+                            <i class="nc-icon nc-mobile"></i>
+                            <p>Add Product</p>
                         </a>
                     </li>
                     <li>

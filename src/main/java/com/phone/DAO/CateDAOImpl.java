@@ -1,5 +1,6 @@
 package com.phone.DAO;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,7 +12,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.phone.model.Category;
 
 public class CateDAOImpl implements CateDAO {
@@ -34,10 +37,9 @@ public class CateDAOImpl implements CateDAO {
 						"INSERT INTO categories (name, description, status, image) VALUES (?, ?, ?, ?)")) {
 			statement.setString(1, category.getName());
 			statement.setString(2, category.getDescription());
-			statement.setInt(3, category.getStatus());
+			statement.setInt(3, category.getStatus());			
 			statement.setString(4, category.getImage());
 			statement.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -95,7 +97,7 @@ public class CateDAOImpl implements CateDAO {
 			statement.setString(2, category.getDescription());
 			statement.setInt(3, category.getStatus());
 			statement.setString(4, category.getImage());
-			 statement.setInt(5, category.getId());
+			statement.setInt(5, category.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,14 +108,33 @@ public class CateDAOImpl implements CateDAO {
 	@Override
 	public void deleteCategory(int id) {
 		String query = "DELETE FROM categories WHERE id = ?";
-        try (Connection connection = dataSource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, id);
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-		
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(query)) {
+			statement.setInt(1, id);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void upLoadImage(String nameFile, String dirFile, MultipartFile file) {
+		System.out.println(dirFile);
+		File fileDir = new File(dirFile);
+		if (!fileDir.exists()) {
+			fileDir.mkdir();
+		}
+		try {
+			// commonsMultipartFiles.transferTo(new File(fileDir+File.separator+nameFile));
+			File savedFile = new File(fileDir + File.separator + nameFile);
+			file.transferTo(savedFile);
+			System.out.println("Upload file thành công!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("Upload file thất bại!");
+		}
+
 	}
 
 }

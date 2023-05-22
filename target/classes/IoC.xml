@@ -22,14 +22,19 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<bean id="UserDAOImpl" lazy-init="true" class="com.phone.DAO.UserDAOImpl">
+	<bean id="UserDAOImpl" lazy-init="true"
+		class="com.phone.DAO.UserDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<bean id="CateDAOImpl" lazy-init="true" class="com.phone.DAO.CateDAOImpl">
+	<bean id="CateDAOImpl" lazy-init="true"
+		class="com.phone.DAO.CateDAOImpl">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+	<bean id="ProductDAOImpl" lazy-init="true"
+		class="com.phone.DAO.ProductDAOImpl">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
 
 	<bean id="dataSource"

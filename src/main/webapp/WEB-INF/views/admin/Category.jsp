@@ -38,12 +38,23 @@
 												<tr>
 													<td>${category.id}</td>
 													<td>${category.name}</td>
-													<td>${category.description}</td>													
-													<td>${category.status == '0' ? 'Stop' : 'Selling'}</td>													
-													<td>${category.image}</td>
-													<td>
-													<a class="mr-5" href="<c:url value="edit-category/${category.id}"/>">Edit</a>
-													<a href="<c:url value="delete-category/${category.id}"/>">Delete</a>
+													<td>${category.description}</td>
+													<td>${category.status == '0' ? 'Stop' : 'Selling'}</td>
+													<td><img class="img" height="60px" width="60px"
+														src="${pageContext.request.contextPath}/template/admin/upload/
+													<c:choose>
+														<c:when test="${category.image ne null}">
+															${category.image}		
+														</c:when>
+														<c:otherwise>
+															springmvc.png
+														</c:otherwise>
+													</c:choose>
+												" />
+													</td>
+													<td><a class="mr-5"
+														href="<c:url value="edit-category/${category.id}"/>">Edit</a>
+														<a href="<c:url value="delete-category/${category.id}"/>">Delete</a>
 													</td>
 												</tr>
 											</c:forEach>
@@ -55,61 +66,52 @@
 						<div class="col-md-12">
 							<div class="card card-plain table-plain-bg">
 								<div class="card-header ">
-									<h4 class="card-title">Table on Plain Background</h4>
-									<p class="card-category">Here is a subtitle for this table</p>
+									<h4 class="card-title">Products List</h4>
+									<p class="card-category">Here</p>
 								</div>
 								<div class="card-body table-full-width table-responsive">
 									<table class="table table-hover">
-										<thead>
-											<th>ID</th>
+										<thead>																					
 											<th>Name</th>
-											<th>Salary</th>
-											<th>Country</th>
-											<th>City</th>
+											<th>Category</th>
+											<th>Description</th>
+											<th>Status</th>
+											<th>Original price</th>
+											<th>Selling price</th>										
+											<th>Quantity</th>
+											<th>Trending</th>
+											<th>Image</th>
+											<th>Action</th>
 										</thead>
 										<tbody>
-											<tr>
-												<td>1</td>
-												<td>Dakota Rice</td>
-												<td>$36,738</td>
-												<td>Niger</td>
-												<td>Oud-Turnhout</td>
-											</tr>
-											<tr>
-												<td>2</td>
-												<td>Minerva Hooper</td>
-												<td>$23,789</td>
-												<td>Curaçao</td>
-												<td>Sinaai-Waas</td>
-											</tr>
-											<tr>
-												<td>3</td>
-												<td>Sage Rodriguez</td>
-												<td>$56,142</td>
-												<td>Netherlands</td>
-												<td>Baileux</td>
-											</tr>
-											<tr>
-												<td>4</td>
-												<td>Philip Chaney</td>
-												<td>$38,735</td>
-												<td>Korea, South</td>
-												<td>Overland Park</td>
-											</tr>
-											<tr>
-												<td>5</td>
-												<td>Doris Greene</td>
-												<td>$63,542</td>
-												<td>Malawi</td>
-												<td>Feldkirchen in Kärnten</td>
-											</tr>
-											<tr>
-												<td>6</td>
-												<td>Mason Porter</td>
-												<td>$78,615</td>
-												<td>Chile</td>
-												<td>Gloucester</td>
-											</tr>
+												<c:forEach var="product" items="${listProduct}">
+												<tr>												
+													<td>${product.name}</td>
+													<td>${product.categoryName}</td>
+													<td>${product.description}</td>
+													<td>${product.status == '0' ? 'Stop' : 'Selling'}</td>
+													<td>${product.og_price}</td>
+													<td>${product.selling_price}</td>
+													<td>${product.quantity}</td>
+													<td>${product.trending == '0' ? 'No' : 'Trending'}</td>
+													<td><img class="img" height="60px" width="60px"
+														src="${pageContext.request.contextPath}/template/admin/upload/
+													<c:choose>
+														<c:when test="${product.image ne null}">
+															${product.image}		
+														</c:when>
+														<c:otherwise>
+															springmvc.png
+														</c:otherwise>
+													</c:choose>
+												" />
+													</td>
+													<td><a class="mr-5"
+														href="<c:url value="edit-product/${product.id}"/>">Edit</a>
+														<a href="<c:url value="delete-product/${product.id}"/>">Delete</a>
+													</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
