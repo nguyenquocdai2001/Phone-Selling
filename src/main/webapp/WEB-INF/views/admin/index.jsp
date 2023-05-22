@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="./addUser">Click here</a>
+	<a href="addUser">Click here</a>
 </body>
 </html>
 

@@ -8,7 +8,7 @@ public class User {
 	private String password;
 	private String phone;
 	private String address;
-	private int role;
+	private String role;
 	private String state;
 	private String created_at;
 	private String updated_at;
@@ -17,7 +17,7 @@ public class User {
 		super();
 	}
 	
-	public User(String name, String email, String password, String phone, String address, int role,
+	public User(String name, String email, String password, String phone, String address, String role,
 			String state, String created_at, String updated_at) {
 		super();
 		this.name = name;
@@ -31,7 +31,7 @@ public class User {
 		this.updated_at = updated_at;
 	}
 	
-	public User(String name, String email, String password, String phone, String address, int role,
+	public User(String name, String email, String password, String phone, String address, String role,
 			String state) {
 		super();
 		this.name = name;
@@ -48,6 +48,14 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.phone = phone;
+		this.address = address;
+	}
+	
+	public User(String name, String email, String phone, String address) {
+		super();
+		this.name = name;
+		this.email = email;
 		this.phone = phone;
 		this.address = address;
 	}
@@ -95,10 +103,10 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	public String getState() {

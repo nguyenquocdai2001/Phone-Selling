@@ -23,4 +23,12 @@ public interface UserDAO {
     boolean checkRegister(String name, String email, String password, String confirmPassword, String phone, String address
     		, Model model);
     
+    boolean checkLogin(String email, String password, Model model);
+    
+    boolean editProfile(String name, String email, String phone, String address, Model model);
+    
+    void saveChangePassword(User user);
+    
+    boolean changePassword(String OldPassword, String NewPassword, String confirmNewPassword, String email, Model model);
+    
 }

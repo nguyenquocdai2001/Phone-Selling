@@ -6,50 +6,60 @@
     -->
             <div class="sidebar-wrapper">
                 <div class="logo">
-                    <a href="http://www.creative-tim.com" class="simple-text">
-                        Creative Tim
+                    <a href="${pageContext.request.contextPath}/home" class="simple-text">
+                        PHONE SELLING
                     </a>
                 </div>
                 <ul class="nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="./home">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/home">
                             <i class="nc-icon nc-chart-pie-35"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li>
-                        <a class="nav-link" href="./addCategory">
-                            <i class="nc-icon nc-paper-2"></i>
-                            <p>Add Category</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="./product">
-                            <i class="nc-icon nc-notes"></i>
-                            <p>Products List</p>
-                        </a>
-                    </li>
+                    
+                    <c:set var="userRole" value="${userRole}" />
+
+					<c:if test="${userRole == 'admin'}">
+	                    <li>
+	                        <a class="nav-link" href="${pageContext.request.contextPath}/addCategory">
+	                            <i class="nc-icon nc-paper-2"></i>
+	                            <p>Add Category</p>
+	                        </a>
+	                    </li>
+                    </c:if>
+                    
+                    <c:set var="userRole" value="${userRole}" />
+
+					<c:if test="${userRole == 'admin'}">
+	                    <li>
+	                        <a class="nav-link" href="${pageContext.request.contextPath}/product">
+	                            <i class="nc-icon nc-notes"></i>
+	                            <p>Products List</p>
+	                        </a>
+	                    </li>
+                    </c:if>
                  
                     <li>
-                        <a class="nav-link" href="./icons.html">
+                        <a class="nav-link" href="">
                             <i class="nc-icon nc-atom"></i>
                             <p>Icons</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="./maps.html">
+                        <a class="nav-link" href="">
                             <i class="nc-icon nc-pin-3"></i>
                             <p>Maps</p>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="./notifications.html">
+                        <a class="nav-link" href="">
                             <i class="nc-icon nc-bell-55"></i>
                             <p>Notifications</p>
                         </a>
                     </li>
                     <li class="nav-item active active-pro">
-                        <a class="nav-link active" href="upgrade.html">
+                        <a class="nav-link active" href="">
                             <i class="nc-icon nc-alien-33"></i>
                             <p>Upgrade to PRO</p>
                         </a>
