@@ -53,9 +53,7 @@ public class ProductDAOImpl implements ProductDAO {
 		Product product = new Product();
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
-						+ "FROM products p " 
-						+ "INNER JOIN categories c ON p.cate_id = c.id" 
-						+ " Where p.id = ?")) {
+						+ "FROM products p " + "INNER JOIN categories c ON p.cate_id = c.id" + " Where p.id = ?")) {
 			preparedStatement.setInt(1, id);
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
 				if (resultSet.next()) {
@@ -112,10 +110,8 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> products = new ArrayList<>();
 
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(
-						"SELECT p.*, c.name AS category_name "
-						+ "FROM products p " 
-						+ "INNER JOIN categories c ON p.cate_id = c.id");
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
+						+ "FROM products p " + "INNER JOIN categories c ON p.cate_id = c.id");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
@@ -144,5 +140,28 @@ public class ProductDAOImpl implements ProductDAO {
 		product.setCategoryName(resultSet.getString("category_name"));
 		return product;
 	}
+
+	@Override
+	public List<Product> getTrendingProduct() {
+		List<Product> products = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT TOP 4 p.*, c.name AS category_name "
+		+"FROM products p "
+		+"INNER JOIN categories c "
+		+"ON p.cate_id = c.id "
+		+"where  p.trending = 1 and p.status = 1");
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				Product product = extractProductFromResultSet(resultSet);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return products;
+	}
+
+	
 
 }

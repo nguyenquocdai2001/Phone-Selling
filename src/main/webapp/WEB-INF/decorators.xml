@@ -2,8 +2,8 @@
 <decorators defaultdir="/decorators">
 
 	
-    <decorator name="trang-chu" page="web.jsp">
-       <pattern>/trang-chu</pattern>
+    <decorator name="clienthome" page="web.jsp">
+       <pattern>/clienthome</pattern>
     </decorator>
     
     <decorator name="home" page="admin.jsp">

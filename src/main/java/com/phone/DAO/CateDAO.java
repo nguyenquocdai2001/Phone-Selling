@@ -12,6 +12,7 @@ public interface CateDAO {
 	
 	public void addCategory(Category category);
     List<Category> getAllCategory();
+    List<Category> getLimitCategory();
     public Category getCategoryByID(int id);
     public void updateCategory(Category category);
     public void deleteCategory(int id);
