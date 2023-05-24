@@ -137,4 +137,25 @@ public class CateDAOImpl implements CateDAO {
 
 	}
 
+	@Override
+	public List<Category> getLimitCategory() {
+		List<Category> list = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement("SELECT TOP 4 * FROM categories WHERE status=1");
+				ResultSet rs = statement.executeQuery()) {
+			while (rs.next()) {
+				Category cate = new Category();
+				cate.setId(rs.getInt("id"));
+				cate.setName(rs.getString("name"));
+				cate.setDescription(rs.getString("description"));
+				cate.setStatus(rs.getInt("status"));
+				cate.setImage(rs.getString("image"));
+				list.add(cate);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
 }
