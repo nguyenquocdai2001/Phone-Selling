@@ -24,20 +24,23 @@
 
 	<bean id="UserDAOImpl" lazy-init="true"
 		class="com.phone.DAO.UserDAOImpl">
-		<property name="dataSource" ref="dataSource" />
+
 	</bean>
 
 	<bean id="CateDAOImpl" lazy-init="true"
 		class="com.phone.DAO.CateDAOImpl">
-		<property name="dataSource" ref="dataSource" />
+	
 	</bean>
 	<bean id="ProductDAOImpl" lazy-init="true"
 		class="com.phone.DAO.ProductDAOImpl">
-		<property name="dataSource" ref="dataSource" />
+		
+	</bean>
+	<bean id="RatingDAOImpl" lazy-init="true"
+		class="com.phone.DAO.RatingDAOImpl">
+		
 	</bean>
 
-
-	<bean id="dataSource"
+	<bean id="myDataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

@@ -132,7 +132,7 @@ public class UserController {
 			if (existingUser.getRole().equals("client")) {
 				System.out.println(session.getAttribute("userSession"));
 				System.out.println("login voi tu cach khach hang");
-				return "./client/index";
+				return "redirect:/clienthome";
 			} else if (existingUser.getRole().equals("admin")) {
 				System.out.println(session.getAttribute("userSession"));
 				System.out.println("login voi tu cach admin");

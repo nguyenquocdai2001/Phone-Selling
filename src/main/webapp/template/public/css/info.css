@@ -9,24 +9,13 @@ nav {
     position: relative !important;
 }
 
-section {
-    margin: 0 5% 0 5%;
-}
 
 .row {
     display: flex;
     flex-direction: row;
 }
 
-.row>.col2 {
-    width: 55%;
-     text-align: left;
-}
 
-.row>.col1 {
-    width: 45%;
-    text-align: right;
-}
 
 .col1>img {
     max-width: 100%;
@@ -97,3 +86,4 @@ video {
 video:focus {
     outline: none;
 }
+

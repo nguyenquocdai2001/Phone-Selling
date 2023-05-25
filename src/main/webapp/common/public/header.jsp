@@ -3,7 +3,7 @@
         <ul>
           <li class="primary-nav">
             <img src="<c:url value='/template/public/Images/img-DS.png'/>"  alt="logo" />
-            <a href="#home">REACH2</a>
+            <a href="./clienthome">REACH2</a>
           </li>
           <li class="secondary-nav">
             <a href="HTML/checkout.html">

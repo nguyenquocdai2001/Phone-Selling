@@ -8,29 +8,39 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.phone.DAO.CateDAO;
 import com.phone.DAO.ProductDAO;
+import com.phone.DAO.RatingDAO;
+import com.phone.DAO.UserDAO;
 import com.phone.model.Product;
+import com.phone.model.Rate_prod;
 import com.phone.model.Category;
 
 @Controller(value = "homeControllerOfClient")
 public class HomeController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
 	CateDAO category = (CateDAO) context.getBean("CateDAOImpl");
-	ProductDAO product = (ProductDAO) context.getBean("ProductDAOImpl");
+	ProductDAO product = (ProductDAO) context.getBean("ProductDAOImpl");	
+	UserDAO client = (UserDAO) context.getBean("UserDAOImpl");
 
+	@Autowired
+	@Lazy
+	private UserDAO userDAO;
     @Autowired
 	@Lazy
     private ProductDAO productDAO;
     @Autowired
 	@Lazy
     private CateDAO cateDAO;
-    
+  
 	@RequestMapping(value = "/clienthome", method = RequestMethod.GET)
 	public ModelAndView homePage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/home");
@@ -43,10 +53,7 @@ public class HomeController {
 		return mav;
 	}
 	
-    @GetMapping("info/{id}")
-    public String showUpdateProductForm(@PathVariable("id") int id, ModelMap modelMap) {
-        Product product = productDAO.getProductById(id);      
-        modelMap.addAttribute("product", product);
-        return "client/product/view";
-    }
+    
+
+ 
 }
