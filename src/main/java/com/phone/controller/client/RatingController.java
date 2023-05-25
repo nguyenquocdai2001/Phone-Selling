@@ -1,12 +1,11 @@
 package com.phone.controller.client;
 
-import java.util.*;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,10 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.phone.DAO.CartItemDAO;
 import com.phone.DAO.CateDAO;
+import com.phone.DAO.OrderDAO;
+import com.phone.DAO.OrderItemDAO;
 import com.phone.DAO.ProductDAO;
 import com.phone.DAO.RatingDAO;
 import com.phone.DAO.UserDAO;
@@ -27,22 +28,14 @@ import com.phone.model.Rate_prod;
 @Controller(value = "ratingControllerOfClient")
 public class RatingController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
-	CateDAO category = (CateDAO) context.getBean("CateDAOImpl");
-	ProductDAO product = (ProductDAO) context.getBean("ProductDAOImpl");
-	UserDAO client = (UserDAO) context.getBean("UserDAOImpl");
-	RatingDAO rating = (RatingDAO) context.getBean("RatingDAOImpl");
-	@Autowired
-	@Lazy
-	private UserDAO userDAO;
-	@Autowired
-	@Lazy
-	private ProductDAO productDAO;
-	@Autowired
-	@Lazy
-	private CateDAO cateDAO;
-	@Autowired
-	@Lazy
-	private RatingDAO ratingDAO;
+	CateDAO cateDAO = (CateDAO) context.getBean("CateDAOImpl");
+	ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAOImpl");
+	CartItemDAO cartItemDAO = (CartItemDAO) context.getBean("CartItemDAOImpl");
+	OrderDAO orderDAO = (OrderDAO) context.getBean("OrderDAOImpl");
+	OrderItemDAO orderItemDAO = (OrderItemDAO) context.getBean("OrderItemDAOImpl");
+	UserDAO userDAO = (UserDAO) context.getBean("UserDAOImpl");  
+	RatingDAO ratingDAO = (RatingDAO) context.getBean("RatingDAOImpl");
+
 
 	@GetMapping("info/{id}")
 	public String showUpdateProductForm(@PathVariable("id") int id, ModelMap modelMap) {
@@ -52,7 +45,6 @@ public class RatingController {
         .mapToInt(Integer::intValue)
         .average()
         .orElse(0);
-		
 		modelMap.addAttribute("product", product)
 		.addAttribute("rateNum", list.size())
 		.addAttribute("rate", average);
@@ -66,13 +58,17 @@ public class RatingController {
 		int prod_id = rating.getProd_id();
 		if (ratingDAO.findCliendId(id, prod_id) == null) {
 			ratingDAO.addRating(rating);
+			redirectAttributes.addFlashAttribute("successMessage", "Lưu thành công");
+			// Chuyển hướng ngược trở lại (redirect back) bằng referer
+			String referer = request.getHeader("Referer");
+			return "redirect:" + referer;
 		} else {
 			ratingDAO.updateRatingByUserId(rating);
+			redirectAttributes.addFlashAttribute("successMessage", "Lưu thành công");
+			// Chuyển hướng ngược trở lại (redirect back) bằng referer
+			String referer = request.getHeader("Referer");
+			return "redirect:" + referer;
 		}
-		redirectAttributes.addFlashAttribute("successMessage", "Lưu thành công");
-		// Chuyển hướng ngược trở lại (redirect back) bằng referer
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
 	}
 
 

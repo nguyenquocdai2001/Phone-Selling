@@ -23,25 +23,37 @@
 
 
 	<bean id="UserDAOImpl" lazy-init="true"
-		class="com.phone.DAO.UserDAOImpl">
-
+		class="com.phone.DAO.UserDAOImpl">	
 	</bean>
 
 	<bean id="CateDAOImpl" lazy-init="true"
 		class="com.phone.DAO.CateDAOImpl">
-	
 	</bean>
+	
 	<bean id="ProductDAOImpl" lazy-init="true"
-		class="com.phone.DAO.ProductDAOImpl">
-		
+		class="com.phone.DAO.ProductDAOImpl">	
 	</bean>
 	<bean id="RatingDAOImpl" lazy-init="true"
 		class="com.phone.DAO.RatingDAOImpl">
+	</bean>
+	
+	<bean id="CartItemDAOImpl" lazy-init="true"
+		class="com.phone.DAO.CartItemDAOImpl">
 		
 	</bean>
-
-	<bean id="myDataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+	<bean id="OrderDAOImpl" lazy-init="true"
+		class="com.phone.DAO.OrderDAOImpl">
+		
+	</bean>
+	
+	<bean id="OrderItemDAOImpl" lazy-init="true"
+		class="com.phone.DAO.OrderItemDAOImpl">
+		
+	</bean>
+	
+	<bean id="myDataSource" lazy-init="true"
+	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<property name="url"

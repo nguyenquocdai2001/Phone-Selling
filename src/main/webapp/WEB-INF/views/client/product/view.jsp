@@ -94,6 +94,7 @@
 														<c:otherwise>
 															springmvc.png
 														</c:otherwise>
+
 														</c:choose>"
 								alt="" class="w-100" />
 						</div>
@@ -112,22 +113,7 @@
 							</lable>
 							<hr>
 							<c:set var="ratenum" value="${average}" />
-							<div class="rating">
-							    <% for (int i = 0; i < ratenum; i++) { %>
-							        <i class="fa fa-star checked"></i>
-							    <% } %>
-							    <% for (int j = ratenum+1; j <= 5; j++) { %>
-							        <i class="fa fa-star"></i>
-							    <% } %>
-							
-							    <span>
-							        <% if (ratings.size() > 0) { %>
-							            <%= ratings.size() %> Đánh giá
-							        <% } else { %>
-							            Chưa có đánh giá
-							        <% } %>
-							    </span>
-							</div>
+	
 							<c:choose>
 								<c:when test="${product.quantity > 0}">
 									<label class="badge bg-success">In stock</label>
@@ -147,14 +133,17 @@
 									onclick="increaseQuantity()" style="width: 40px" /> </span> <br /> <br />
 							</div>
 
-							<a class="button-cart" href="checkout.html">Add to cart</a>
+							<a class="button-cart" href="${pageContext.request.contextPath}/add/${product.id}">Add to cart</a>
 							&nbsp; &nbsp; <a class="wishlist" href="">Add to wishlist</a>
 
 						</div>
 
 					</div>
 				</div>
+
+								
 			</div>
+
 		</div>
 	</section>
 	<c:choose>

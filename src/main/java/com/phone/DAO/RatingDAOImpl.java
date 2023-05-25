@@ -5,41 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.jdbc.core.JdbcTemplate;
-
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.phone.model.Rate_prod;
 
 public class RatingDAOImpl implements RatingDAO {
 
-	@Autowired
-	@Lazy
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	@Lazy
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
+	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
 	@Override
 	public void addRating(Rate_prod rating) {
-		String query = "INSERT INTO rate_prod (user_id, prod_id, stars_rated)" + "VALUES (?, ?, ?)";
 
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement(query)) {
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO rate_prod (user_id, prod_id, stars_rated) VALUES (?, ?, ?)")) {
 			statement.setInt(1, rating.getUser_id());
 			statement.setInt(2, rating.getProd_id());
 			statement.setInt(3, rating.getStars_rated());
-
-			System.out.println("rating success");
+			System.out.println("rating successlly");
 			statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -55,14 +42,14 @@ public class RatingDAOImpl implements RatingDAO {
 
 	@Override
 	public void updateRatingByUserId(Rate_prod rating) {
+		String sql = "UPDATE rate_prod SET stars_rated = ? WHERE user_id = ? AND prod_id = ?";
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("Update rate_prod set stars_rated = ? where user_id = ? and prod_id =?")) {
+				PreparedStatement statement = connection.prepareStatement(sql)) {
 			statement.setInt(1, rating.getUser_id());
 			statement.setInt(2, rating.getProd_id());
 			statement.setInt(3, rating.getStars_rated());
+			System.out.println("update rating successfully");
 			statement.executeUpdate();
-			System.out.println("update rating success");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -98,17 +85,16 @@ public class RatingDAOImpl implements RatingDAO {
 		List<Integer> list = new ArrayList<>();
 		String query = "select stars_rated from rate_prod where  prod_id = ?";
 		try (Connection connection = dataSource.getConnection();
-			PreparedStatement statement = connection.prepareStatement(query)) {
+				PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);
 			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {			
-				 int starsRated =resultSet.getInt("stars_rated");
+			while (resultSet.next()) {
+				int starsRated = resultSet.getInt("stars_rated");
 				list.add(starsRated);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
 		return list;
 	}
 
