@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -19,16 +20,8 @@ import com.phone.model.Category;
 
 public class CateDAOImpl implements CateDAO {
 
-	@Autowired
-	@Lazy
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	@Lazy
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
+	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
 	@Override
 	public void addCategory(Category category) {

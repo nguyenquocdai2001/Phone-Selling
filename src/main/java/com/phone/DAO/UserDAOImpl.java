@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.ui.Model;
 
@@ -22,16 +23,8 @@ import com.phone.validator.Message;
 
 public class UserDAOImpl implements UserDAO{
 	
-	@Autowired
-	@Lazy
-    private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	@Lazy
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
+	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
 	@Override
 	public void saveUser(User user) {

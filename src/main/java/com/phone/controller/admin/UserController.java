@@ -121,18 +121,19 @@ public class UserController {
 			System.out.println("login thanh cong");
 			// set session
 			session.setAttribute("userSession", existingUser);
-			session.setAttribute("idUser", userDAO.getUserById(userDAO.getUserByEmail(email).get().getId()));
+			session.setAttribute("idUser", userDAO.getUserById(userDAO.getUserByEmail(email).get().getId()).getId());
+			session.setAttribute("USERNAME", email);
 			
 			// session này dùng cho hiển thị fullname của người dùng ở header
 			session.setAttribute("helloUser", existingUser.getName());
 			
 			// session này dùng cho hiển thị các chức năng của người dùng admin hoặc client ở sidebars
-						session.setAttribute("userRole", existingUser.getRole());
+			session.setAttribute("userRole", existingUser.getRole());
 
 			if (existingUser.getRole().equals("client")) {
 				System.out.println(session.getAttribute("userSession"));
 				System.out.println("login voi tu cach khach hang");
-				return "./client/index";
+				return "redirect:/clienthome";
 			} else if (existingUser.getRole().equals("admin")) {
 				System.out.println(session.getAttribute("userSession"));
 				System.out.println("login voi tu cach admin");

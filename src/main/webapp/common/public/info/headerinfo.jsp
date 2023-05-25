@@ -6,7 +6,7 @@
             <a href="../index.html">DOWNY SHOES</a>
           </li>
           <li class="secondary-nav">
-            <a href="../HTML/checkout.html">
+            <a href="${pageContext.request.contextPath}/views">
               <i class="fas fa-shopping-cart"></i> CART
             </a>
           </li>

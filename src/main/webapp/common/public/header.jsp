@@ -6,7 +6,7 @@
             <a href="#home">REACH2</a>
           </li>
           <li class="secondary-nav">
-            <a href="HTML/checkout.html">
+            <a href="${pageContext.request.contextPath}/views">
               <i class="fas fa-shopping-cart"></i> CART
             </a>
           </li>
@@ -14,7 +14,7 @@
             <a href="./HTML/features.html">DESIGN SUMMARY</a>
           </li>
           <li class="secondary-nav">
-            <a href="./HTML/about-me.html">ABOUT ME</a>
+            <a href="${pageContext.request.contextPath}/login">LOGIN</a>
           </li>
 
           <li class="secondary-nav"><a href="HTML/women.html">WOMEN</a></li>

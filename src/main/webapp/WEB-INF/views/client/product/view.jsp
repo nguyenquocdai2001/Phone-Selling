@@ -40,7 +40,7 @@
 				<input type="button" value="-" onclick="decreaseQuantity()" /> 
 				<input style=" width: 60px; height: 25px; text-align: center;" type="text" id="quantity" value="1" /> 
 				<input type="button" value="+" onclick="increaseQuantity()" /> </span> <br /> <br /> 
-				<a class="button-cart" href="checkout.html">Add to cart</a> &nbsp;
+				<a class="button-cart" href="${pageContext.request.contextPath}/add/${product.id}">Add to cart</a> &nbsp;
 				&nbsp; <a class="wishlist" href="">Add to wishlist</a>
 			</div>
 		</div>

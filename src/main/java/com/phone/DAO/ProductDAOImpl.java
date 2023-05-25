@@ -10,21 +10,14 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.phone.model.Product;
 
 public class ProductDAOImpl implements ProductDAO {
-	@Autowired
-	@Lazy
-	private DataSource dataSource;
-	private JdbcTemplate jdbcTemplate;
-
-	@Autowired
-	@Lazy
-	public void setDataSource(DataSource dataSource) {
-		this.jdbcTemplate = new JdbcTemplate(dataSource);
-	}
+	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
+	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
 	@Override
 	public void addProduct(Product product) {
