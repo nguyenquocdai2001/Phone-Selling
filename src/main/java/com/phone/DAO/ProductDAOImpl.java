@@ -101,7 +101,6 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<Product> getAllProducts() {
 		List<Product> products = new ArrayList<>();
-
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
 						+ "FROM products p " + "INNER JOIN categories c ON p.cate_id = c.id");

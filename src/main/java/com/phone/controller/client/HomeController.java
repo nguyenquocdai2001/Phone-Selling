@@ -62,7 +62,24 @@ public class HomeController {
 		return mav;
 	}
 
-    
+	
+	@RequestMapping(value = "/allProduct", method = RequestMethod.GET)
+	public ModelAndView productPage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getAllProducts();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/phone", method = RequestMethod.GET)
+	public ModelAndView phonePage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getAllProducts();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
   //-----------------------------------------------------------View cart---------------------------------------------------------
   	@GetMapping("views")
   	public String viewCarts(Model model, HttpSession session) {

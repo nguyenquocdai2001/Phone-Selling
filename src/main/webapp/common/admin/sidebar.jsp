@@ -43,7 +43,7 @@
 
 					<c:if test="${userRole == 'admin'}">
 	               <li>
-                        <a class="nav-link" href="./product">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/product">
                             <i class="nc-icon nc-mobile"></i>
                             <p>Add Product</p>
 						</a>

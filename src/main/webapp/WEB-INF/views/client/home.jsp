@@ -4,7 +4,7 @@
 		<div class="row" style="width: 80%; margin: 0 auto;">
 			<div class="col">
 				<div class="overlay-image">
-					<a href="HTML/men.html"> <img height="400px !important"
+					<a href="${pageContext.request.contextPath}/phone"> <img height="400px !important"
 						class="image"
 						src="<c:url value='/template/public/Images/iphone.jpg'/>"
 						alt="Alt text" />
@@ -22,7 +22,7 @@
 			</div>
 			<div class="col">
 				<div class="overlay-image">
-					<a href="HTML/women.html"> <img class="image"
+					<a href="${pageContext.request.contextPath}/phone"> <img class="image"
 						height="400px !important"
 						src="<c:url value='/template/public/Images/apple-ear.jpg'/>"
 						alt="Alt text" />
@@ -56,7 +56,7 @@
 														</c:otherwise>
 													</c:choose>
 												"
-						alt="" width="235px" height="170px" />
+						alt="" width="180px" height="180px" />
 						<figcaption>${cate.name}</figcaption>
 					</a>
 				</figure>
@@ -80,7 +80,7 @@
 														</c:otherwise>
 													</c:choose>
 												"
-						alt="" width="235px"  height="200px"/>
+						alt="" width="235px"  height="235px"/>
 						<figcaption>${product.name}</figcaption>
 					</a>
 				</figure>

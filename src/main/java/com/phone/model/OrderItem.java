@@ -12,7 +12,6 @@ public class OrderItem {
 	private LocalDateTime updated_at;
 	
 
-
 	public OrderItem(int id, Order orderID, Product productID, int orderItemQty, double price, LocalDateTime created_at,
 			LocalDateTime updated_at) {
 		super();

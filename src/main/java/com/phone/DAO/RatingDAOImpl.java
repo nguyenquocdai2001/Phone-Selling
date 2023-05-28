@@ -45,9 +45,9 @@ public class RatingDAOImpl implements RatingDAO {
 		String sql = "UPDATE rate_prod SET stars_rated = ? WHERE user_id = ? AND prod_id = ?";
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setInt(1, rating.getUser_id());
-			statement.setInt(2, rating.getProd_id());
-			statement.setInt(3, rating.getStars_rated());
+			statement.setInt(1, rating.getStars_rated());
+			statement.setInt(2, rating.getUser_id());
+			statement.setInt(3, rating.getProd_id());
 			System.out.println("update rating successfully");
 			statement.executeUpdate();
 		} catch (SQLException e) {
