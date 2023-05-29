@@ -49,27 +49,7 @@
 						</a>
 					</li>
                     </c:if>
-                 
-                    <li>
-                        <a class="nav-link" href="">
-                            <i class="nc-icon nc-atom"></i>
-                            <p>Icons</p>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">
-                            <i class="nc-icon nc-pin-3"></i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
-                  
+                              
                 </ul>
             </div>
         </div>

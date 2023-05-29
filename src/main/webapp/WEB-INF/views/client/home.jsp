@@ -22,7 +22,7 @@
 			</div>
 			<div class="col">
 				<div class="overlay-image">
-					<a href="${pageContext.request.contextPath}/phone"> <img class="image"
+					<a href="${pageContext.request.contextPath}/accessories"> <img class="image"
 						height="400px !important"
 						src="<c:url value='/template/public/Images/apple-ear.jpg'/>"
 						alt="Alt text" />
@@ -45,7 +45,7 @@
 		<div class="row" style="width: 83%; margin: 0 auto;">
 			<c:forEach var="cate" items="${listCate}">
 				<figure class="item">
-					<a href="<c:url value="info/${product.id}"/>"> <img
+					<a href="<c:url value="category/${cate.id}"/>"> <img
 						src="${pageContext.request.contextPath}/template/admin/upload/
 													<c:choose>
 														<c:when test="${cate.image ne null}">

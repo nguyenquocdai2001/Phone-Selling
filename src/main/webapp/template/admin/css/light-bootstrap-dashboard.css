@@ -13,7 +13,14 @@
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.*/
  
 /*      light colors         */
-
+.search-bar
+{
+	width:50%;
+	margin-left : 5%;
+}
+.ui-menu{
+	z-index:3500 !important;
+}
 @keyframes spin {
     from {
         transform: rotate(0deg);
@@ -2104,7 +2111,7 @@ fieldset[disabled] .form-control {
 }
 
 .navbar.fixed {
-    width: calc(100% - $sidebar-width);
+    width: calc(100% - sidebar-width);
     right: 0;
     left: auto;
     border-radius: 0;

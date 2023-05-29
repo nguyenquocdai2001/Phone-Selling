@@ -11,12 +11,11 @@
 	rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
 <!-- CSS Files -->
 <link href="<c:url value='/template/admin/css/bootstrap.min.css'/>"
 	rel="stylesheet" type="text/css">
 <link
 	href="<c:url value='/template/admin/css/light-bootstrap-dashboard.css?v=2.0.0 '/>"
-	rel="stylesheet">
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="<c:url value='/template/admin/css/demo.css'/>"
 	rel="stylesheet">

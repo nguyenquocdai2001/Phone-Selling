@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,22 +26,28 @@ a {
 			<div class="p-3 mb-2 bg-secondary text-white border-top">
 				<div class="container">
 					<h6 class="mb-0">
+					<c:set var="sameCategory" value="true" />
+						<c:forEach var="product" items="${listProduct}" varStatus="loop">
+						    <c:if test="${sameCategory && product.categoryName != listProduct[0].categoryName}">
+						        <c:set var="sameCategory" value="false" />
+						    </c:if>
+						    
+						</c:forEach>
 						<c:choose>
-							<c:when test="${category.name ne null}">
-								<a style="color: white !important;"
-									href="${pageContext.request.contextPath}/category">Category</a>/<a
+							<c:when test="${sameCategory}">
+								<a style="color: white !important;" 
+									href="${pageContext.request.contextPath}/category">Category</a> / <a
 									style="color: white !important;"
-									href="${pageContext.request.contextPath}/allProduct">${category.name}</a>
+									href="${pageContext.request.contextPath}/allProduct">${listProduct[0].categoryName}</a>
 							</c:when>
 							<c:otherwise>
 								<a style="color: white !important;"
-									href="${pageContext.request.contextPath}/category">Category</a>/<a
+									href="${pageContext.request.contextPath}/category">Category</a> / <a
 									style="color: white !important;"
 									href="${pageContext.request.contextPath}/allProduct">All
 									Product</a>
 							</c:otherwise>
 						</c:choose>
-
 					</h6>
 				</div>
 			</div>
@@ -50,7 +57,7 @@ a {
 					<div class="row">
 						<c:forEach var="product" items="${listProduct}">
 							<div class="col-md-2 mb-3">
-								<a href="<c:url value="./info/${product.id}"/>">
+								<a href="${pageContext.request.contextPath}/info/${product.id}">
 									<div class="card">
 										<img
 											src="${pageContext.request.contextPath}/template/admin/upload/

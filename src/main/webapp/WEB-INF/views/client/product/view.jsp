@@ -114,8 +114,14 @@ a {
 						</div>
 						<div class="col-md-7">
 							<h1 class="mb-0">${product.name}
+							<c:choose>
+								<c:when test="${product.status ==1 }">
 								<label style="font-size: 16px;"
 									class="float-end badge bg-danger">${product.trending == '1' ? 'Trending' : ''}</label>
+								</c:when>
+							
+							</c:choose>
+								
 							</h1>
 							<hr>
 
@@ -151,6 +157,8 @@ a {
 							<p class="mt-3">${product.description}</p>
 							<hr>
 							<c:choose>
+							<c:when test="${product.status ==1 }">
+							<c:choose>
 								<c:when test="${product.quantity > 0}">
 									<label class="badge bg-success">In stock</label>
 								</c:when>
@@ -158,6 +166,7 @@ a {
 									<label class="badge bg-danger">Run out</label>
 								</c:otherwise>
 							</c:choose>
+						
 							<label>Quantity</label>
 							<div class="row mt-2">
 								<div class="col-md-3">
@@ -183,6 +192,12 @@ a {
 									</a>
 								</div>
 							</div>
+								</c:when>
+								<c:otherwise>
+							<label style="font-size: 24px;"
+									class="float-end badge bg-danger">Temporary business suspension</label>
+							</c:otherwise>
+								</c:choose>
 						</div>
 						<hr>
 						<div class="row">

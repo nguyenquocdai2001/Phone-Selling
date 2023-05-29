@@ -103,7 +103,7 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> products = new ArrayList<>();
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
-						+ "FROM products p " + "INNER JOIN categories c ON p.cate_id = c.id");
+						+ "FROM products p " + "INNER JOIN categories c ON p.cate_id = c.id ");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
@@ -141,7 +141,7 @@ public class ProductDAOImpl implements ProductDAO {
 		+"FROM products p "
 		+"INNER JOIN categories c "
 		+"ON p.cate_id = c.id "
-		+"where  p.trending = 1 and p.status = 1");
+		+"where p.trending = 1 and c.status = 1");
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
@@ -151,6 +151,92 @@ public class ProductDAOImpl implements ProductDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return products;
+	}
+
+	@Override
+	public List<Product> getPhone() {
+		List<Product> products = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
+						+ " FROM products p "
+						+ "INNER JOIN categories c"
+						+ " ON p.cate_id = c.id"
+						+ " Where p.cate_id = 21 ");
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				Product product = extractProductFromResultSet(resultSet);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return products;
+	}
+
+	@Override
+	public List<Product> getOther() {
+		List<Product> products = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
+						+ " FROM products p "
+						+ "INNER JOIN categories c"
+						+ " ON p.cate_id = c.id"
+						+ " Where p.cate_id <> 21"
+						+ " and c.status = 1");
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				Product product = extractProductFromResultSet(resultSet);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return products;
+	}
+
+	@Override
+	public List<Product> getByCateID(int id) {
+		List<Product> products = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
+						+ " FROM products p "
+						+ "INNER JOIN categories c ON p.cate_id = c.id"
+						+ " Where c.status=1 and p.cate_id = ? ")) {
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Product product = extractProductFromResultSet(resultSet);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return products;
+	}
+
+	@Override
+	public List<Product> getAllProductsClient() {
+		List<Product> products = new ArrayList<>();
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT p.*, c.name AS category_name "
+						+ "FROM products p " + "INNER JOIN categories c ON p.cate_id = c.id where c.status = 1");
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				Product product = extractProductFromResultSet(resultSet);
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return products;
 	}
 

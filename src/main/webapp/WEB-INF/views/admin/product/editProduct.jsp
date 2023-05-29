@@ -31,10 +31,13 @@
 													<label>Category</label> <select class="form-control" 
 													required name="category_id" id="category_id">
 														<option value="" selected>Category</option>
-														<c:forEach var="cate" items="${listCate}">
-															<option value="${cate.id}"
-														${product.category_id == cate.id ? 'selected' : ''}>${cate.name}</option>	
-																										
+														<c:forEach var="cate" items="${listCate}">															
+															<c:choose>
+														<c:when test="${cate.status == 1}">
+														<option value="${cate.id}"
+															${product.category_id == cate.id  ? 'selected' : ''}>${cate.name}</option>	
+														</c:when>
+														</c:choose>																								
 														</c:forEach>
 													</select>
 													

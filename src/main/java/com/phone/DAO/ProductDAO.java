@@ -10,5 +10,9 @@ public interface ProductDAO {
 	    void updateProduct(Product product);
 	    void deleteProduct(int id);
 	    List<Product> getAllProducts();
+	    List<Product> getAllProductsClient();
 	    List<Product> getTrendingProduct();
+	    List<Product> getPhone();
+	    List<Product> getOther();
+	    List<Product> getByCateID(int id);
 }

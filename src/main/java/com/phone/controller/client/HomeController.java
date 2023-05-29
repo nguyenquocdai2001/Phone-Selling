@@ -67,7 +67,7 @@ public class HomeController {
 	public ModelAndView productPage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/index");
 		List<Product> listProduct = new ArrayList<>(); 
-		listProduct = productDAO.getAllProducts();
+		listProduct = productDAO.getAllProductsClient();
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
@@ -76,7 +76,23 @@ public class HomeController {
 	public ModelAndView phonePage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/index");
 		List<Product> listProduct = new ArrayList<>(); 
-		listProduct = productDAO.getAllProducts();
+		listProduct = productDAO.getPhone();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+	@RequestMapping(value = "/accessories", method = RequestMethod.GET)
+	public ModelAndView accessoriesPage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getOther();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
+	public ModelAndView getProductByCategoryID(@PathVariable("id") int id, ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getByCateID(id);
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
