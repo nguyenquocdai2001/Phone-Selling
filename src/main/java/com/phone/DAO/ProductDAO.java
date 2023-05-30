@@ -11,4 +11,5 @@ public interface ProductDAO {
 	    void deleteProduct(int id);
 	    List<Product> getAllProducts();
 	    List<Product> getTrendingProduct();
+	    void updateProductAfterSelling(Product product);
 }

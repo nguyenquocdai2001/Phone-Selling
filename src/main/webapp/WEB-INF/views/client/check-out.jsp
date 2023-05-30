@@ -81,7 +81,9 @@
 							</button>
 						</div>
 					</c:if>
-					<button class="btn btn-success" type="submit">Save</button>
+					<c:if test='${TOTAL_PRICE > 0}'>
+						<button class="btn btn-success" type="submit">Save</button>
+					</c:if>
 					<a class="btn btn-secondary" href="${pageContext.request.contextPath}/views">Back</a>
 				</form>
 			</div>

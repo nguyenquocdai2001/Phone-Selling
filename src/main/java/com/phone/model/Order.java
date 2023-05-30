@@ -3,7 +3,7 @@ package com.phone.model;
 import java.util.Set;
 
 public class Order {
-	private int id;
+	private String id;
 	private int userID;
 	private String name;
 	private String email;
@@ -15,7 +15,7 @@ public class Order {
 	private Set<OrderItem> orderItem;
 	
 	
-	public Order(int id, int userID, String name, String email, String phone, String address, String paymentMode,
+	public Order(String id, int userID, String name, String email, String phone, String address, String paymentMode,
 			int status, double totalPrice, Set<OrderItem> orderItem) {
 		super();
 		this.id = id;
@@ -34,10 +34,10 @@ public class Order {
 		super();
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getUserID() {

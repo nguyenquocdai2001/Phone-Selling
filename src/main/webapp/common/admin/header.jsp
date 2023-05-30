@@ -2,7 +2,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="${pageContext.request.contextPath}/"> Dashboard </a>
+		<a class="navbar-brand" href="${pageContext.request.contextPath}/home"> Dashboard </a>
 		<button href="" class="navbar-toggler navbar-toggler-right"
 			type="button" data-toggle="collapse" aria-controls="navigation-index"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
 							<a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword/${userSession.id}">Change password</a> 
 		
 							<div class="divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
+							
 						</div></li>
 				</c:if>
 

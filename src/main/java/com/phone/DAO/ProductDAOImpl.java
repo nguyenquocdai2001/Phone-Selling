@@ -155,6 +155,22 @@ public class ProductDAOImpl implements ProductDAO {
 		return products;
 	}
 
+	@Override
+	public void updateProductAfterSelling(Product product) {
+		
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("UPDATE products SET qty = ? WHERE id = ?")) {
+			preparedStatement.setInt(1, product.getQuantity());
+			preparedStatement.setInt(2, product.getId());
+			preparedStatement.executeUpdate();
+			System.out.println("So luong product có id: "+product.getId() +" con lai "+product.getQuantity());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 
 }

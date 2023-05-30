@@ -42,33 +42,24 @@
                     <c:set var="userRole" value="${userRole}"/>
 
 					<c:if test="${userRole == 'admin'}">
-	               <li>
-                        <a class="nav-link" href="./product">
-                            <i class="nc-icon nc-mobile"></i>
-                            <p>Add Product</p>
-						</a>
-					</li>
+		               <li>
+	                        <a class="nav-link" href="./product">
+	                            <i class="nc-icon nc-mobile"></i>
+	                            <p>Add Product</p>
+							</a>
+						</li>
                     </c:if>
-                 
-                    <li>
-                        <a class="nav-link" href="">
-                            <i class="nc-icon nc-atom"></i>
-                            <p>Icons</p>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">
-                            <i class="nc-icon nc-pin-3"></i>
-                            <p>Maps</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link" href="">
-                            <i class="nc-icon nc-bell-55"></i>
-                            <p>Notifications</p>
-                        </a>
-                    </li>
+                    
+                 	<c:if test="${userRole == 'admin'}">
+	                    <li>
+	                        <a class="nav-link" href="${pageContext.request.contextPath}/getAllOrderAdmin">
+	                            <i class="nc-icon nc-atom"></i>
+	                            <p>Orders</p>
+	
+	                        </a>
+	                    </li>
+                    </c:if>
+                
                   
                 </ul>
             </div>

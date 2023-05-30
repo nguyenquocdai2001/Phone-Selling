@@ -28,7 +28,7 @@
         
 	<div class="container">
 		<header class="text-center bg-light text-dark py-3 rounded mt-3 mb-3">
-			<h1 class="display-5 font-weight-bold">DRINK CART</h1>
+			<h1 class="display-5 font-weight-bold">CART</h1>
 		</header>
 		
 		<div class="rows">
@@ -45,8 +45,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="item" items="${CART_ITEMS}">
+						
 							<form action="${pageContext.request.contextPath}/update" method="post">
+							<c:forEach var="item" items="${CART_ITEMS}">
 								<input type="hidden" name="id" value="${item.productID}"/>
 								<tr>
 									<td>${item.productID }</td>
