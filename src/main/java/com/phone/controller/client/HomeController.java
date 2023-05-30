@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.phone.DAO.CartItemDAO;
@@ -96,6 +97,11 @@ public class HomeController {
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
+	 @RequestMapping(value = "/search", method = RequestMethod.GET)
+	    @ResponseBody
+	    public List<String> searchAutocomplete(@RequestParam("keyword") String keyword) {
+	        return productDAO.search(keyword);
+	    }
   //-----------------------------------------------------------View cart---------------------------------------------------------
   	@GetMapping("views")
   	public String viewCarts(Model model, HttpSession session) {

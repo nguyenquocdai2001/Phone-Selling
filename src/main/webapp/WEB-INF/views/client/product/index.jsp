@@ -19,7 +19,7 @@ a {
 </style>
 </head>
 <body class="g-sidenav-show bg-gray-200">
-	<div class="se-pre-con"></div>
+
 	<%@ include file="/common/public/info/headerinfo.jsp"%>
 	<div class="container-fluid py-4">
 		<section>
@@ -56,7 +56,7 @@ a {
 				<div class="container">
 					<div class="row">
 						<c:forEach var="product" items="${listProduct}">
-							<div class="col-md-2 mb-3">
+							<div class="col-md-3 mb-3">
 								<a href="${pageContext.request.contextPath}/info/${product.id}">
 									<div class="card">
 										<img

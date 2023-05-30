@@ -15,4 +15,5 @@ public interface ProductDAO {
 	    List<Product> getPhone();
 	    List<Product> getOther();
 	    List<Product> getByCateID(int id);
+	    List<String> search(String keyword);
 }
