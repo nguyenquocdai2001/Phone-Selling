@@ -96,7 +96,10 @@ public class CategoryController {
 	}
 
 	@PostMapping("edit-category/category/{id}/edit")
-	public String editProduct(@ModelAttribute("category") Category category) {
+	public String editProduct(@ModelAttribute("category") Category category, @RequestParam("file") MultipartFile file) {
+		String nameFile = file.getOriginalFilename();
+		saveImageInProject(file);
+		category.setImage(nameFile);
 		cateDAO.updateCategory(category);
 		return "redirect:/productandcategory";
 	}

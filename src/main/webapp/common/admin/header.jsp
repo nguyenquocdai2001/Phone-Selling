@@ -1,4 +1,3 @@
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg " color-on-scroll="500">
 	<div class="container-fluid">
@@ -28,10 +27,8 @@
 						<a class="dropdown-item" href="#">Notification 3</a>
 						<a class="dropdown-item" href="#">Notification 4</a>
 						<a class="dropdown-item" href="#">Another notification</a>
-					</ul></li>
-				<li class="nav-item"><a href="#" class="nav-link"> <i
-						class="nc-icon nc-zoom-split"></i> <span class="d-lg-block">&nbsp;Search</span>
-				</a></li>
+					</ul>
+					</li>	
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<c:set var="userSession" value="${userSession}" />

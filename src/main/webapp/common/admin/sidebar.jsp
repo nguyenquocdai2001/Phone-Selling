@@ -42,6 +42,7 @@
                     <c:set var="userRole" value="${userRole}"/>
 
 					<c:if test="${userRole == 'admin'}">
+
 		               <li>
 	                        <a class="nav-link" href="./product">
 	                            <i class="nc-icon nc-mobile"></i>
@@ -60,7 +61,7 @@
 	                    </li>
                     </c:if>
                 
-                  
+                 
                 </ul>
             </div>
         </div>

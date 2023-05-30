@@ -3,16 +3,23 @@
         <ul>
           <li class="primary-nav">
             <img src="<c:url value='/template/public/Images/img-DS.png'/>"  alt="logo" />
+
             <a href="${pageContext.request.contextPath}/clienthome">PHONE SELLING</a>
+
+            <a href="./clienthome">REACH2</a>
+
           </li>
+          	   
           <li class="secondary-nav">
             <a href="${pageContext.request.contextPath}/views">
               <i class="fas fa-shopping-cart"></i> CART
             </a>
+
           </li>
           <li class="secondary-nav">
             <a href=""></a>
-          </li>
+          </li>   
+
           <c:if test="${empty userSession}">
 	          <li class="secondary-nav">
 		         <a href="${pageContext.request.contextPath}/login">LOGIN</a>
@@ -42,7 +49,7 @@
         <span class="border">
          REACHING 2 Technology
         </span>
-        <p><a href="HTML/men.html">Shop Now</a></p>
+        <p><a href="${pageContext.request.contextPath}/allProduct">Shop Now</a></p>
       </div>
       
     </header>

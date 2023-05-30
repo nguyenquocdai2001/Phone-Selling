@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <title>Category adding</title>
 <%@ include file="/common/admin/link.jsp"%>
+
 </head>
 <body>
 	<div class="wrapper">
@@ -24,7 +25,7 @@
 									<p class="card-category">Here is all category that we have</p>
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table class="table table-hover table-striped">
+									<table id="category"class="table table-hover table-striped">
 										<thead>
 											<th>ID</th>
 											<th>Name</th>
@@ -70,7 +71,7 @@
 									<p class="card-category">Here</p>
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table class="table table-hover">
+									<table id="product"class="table table-hover">
 										<thead>																					
 											<th>Name</th>
 											<th>Category</th>
@@ -126,5 +127,6 @@
 	</div>
 </body>
 <%@ include file="/common/admin/script.jsp"%>
+
 </html>
 

@@ -4,7 +4,7 @@ public class CartItem {
 	private Integer id;
 	private int user_id;
 	private int prod_id;
-	private int qty = 1;
+	private int qty = 1;;
 	private String name;
 	private double price;
 	

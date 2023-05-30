@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,18 @@ import com.phone.DAO.CateDAO;
 import com.phone.DAO.OrderDAO;
 import com.phone.DAO.OrderItemDAO;
 import com.phone.DAO.ProductDAO;
+
+import com.phone.DAO.RatingDAO;
+import com.phone.DAO.UserDAO;
+import com.phone.model.Product;
+import com.phone.model.Rate_prod;
+
 import com.phone.DAO.UserDAO;
 import com.phone.model.Product;
 import com.phone.model.User;
 import com.phone.model.Order;
 import com.phone.model.OrderItem;
+
 import com.phone.model.Category;
 import com.phone.model.CartItem;
 
@@ -40,6 +48,7 @@ public class HomeController {
 	UserDAO userDAO = (UserDAO) context.getBean("UserDAOImpl");
     
     
+
 	@RequestMapping(value = "/clienthome", method = RequestMethod.GET)
 	public ModelAndView homePage(ModelMap modelmap, HttpSession session) {
 		
@@ -68,24 +77,57 @@ public class HomeController {
 		modelmap.addAttribute("listCate", listCate);
 		return mav;
 	}
+
 	
-    @GetMapping("info/{id}")
-    public String showUpdateProductForm(@PathVariable("id") int id, ModelMap modelMap, HttpSession session) {
-    	if (session.getAttribute("userSession") != null) {
-	    	User loggedInUser = (User) session.getAttribute("userSession");
-			if (loggedInUser.getRole().equals("admin")) {
-				return "redirect:/home";
-			} else {
-				Product product = productDAO.getProductById(id);      
-				modelMap.addAttribute("product", product);
-				return "client/product/view";
-			}
-    	}
-    	Product product = productDAO.getProductById(id);      
-		modelMap.addAttribute("product", product);
-    	return "client/product/view";
-    }
+
+	/*
+	 * @GetMapping("info/{id}") public String
+	 * showUpdateProductForm(@PathVariable("id") int id, ModelMap modelMap,
+	 * HttpSession session) { if (session.getAttribute("userSession") != null) {
+	 * User loggedInUser = (User) session.getAttribute("userSession"); if
+	 * (loggedInUser.getRole().equals("admin")) { return "redirect:/home"; } else {
+	 * Product product = productDAO.getProductById(id);
+	 * modelMap.addAttribute("product", product); return "client/product/view"; } }
+	 * Product product = productDAO.getProductById(id);
+	 * modelMap.addAttribute("product", product); return "client/product/view"; }
+	 */
     
+
+	@RequestMapping(value = "/allProduct", method = RequestMethod.GET)
+	public ModelAndView productPage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getAllProductsClient();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/phone", method = RequestMethod.GET)
+	public ModelAndView phonePage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getPhone();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+	@RequestMapping(value = "/accessories", method = RequestMethod.GET)
+	public ModelAndView accessoriesPage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getOther();
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
+	public ModelAndView getProductByCategoryID(@PathVariable("id") int id, ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/index");
+		List<Product> listProduct = new ArrayList<>(); 
+		listProduct = productDAO.getByCateID(id);
+		modelmap.addAttribute("listProduct", listProduct);
+		return mav;
+	}
+
   //-----------------------------------------------------------View cart---------------------------------------------------------
   	@GetMapping("views")
   	public String viewCarts(Model model, HttpSession session) {

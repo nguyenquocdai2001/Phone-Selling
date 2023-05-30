@@ -16,8 +16,8 @@ public class OrderItem {
 	
 
 
-	public OrderItem(int id, String orderID, int productID, int orderItemQty, double price, String created_at,
-			LocalDateTime updated_at) {
+
+	public OrderItem(int id, String orderID, int productID, int orderItemQty, double price, String created_at, LocalDateTime updated_at){
 		super();
 		this.id = id;
 		this.orderID = orderID;

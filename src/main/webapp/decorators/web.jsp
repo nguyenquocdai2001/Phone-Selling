@@ -11,8 +11,10 @@
 <%@ include file="/common/public/link.jsp"%>
 </head>
 <body>
+
 	<div class="se-pre-con"></div>
 	<%@ include file="/common/public/header.jsp"%>
+
 	<dec:body />
 	<%@ include file="/common/public/footer.jsp"%>
 </body>

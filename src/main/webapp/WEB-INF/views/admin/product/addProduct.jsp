@@ -32,7 +32,12 @@
 													required name="category_id" id="category_id">
 														<option value="" selected>Category</option>
 														<c:forEach var="cate" items="${listCate}">
-															<option value="${cate.id}">${cate.name}</option>													
+														<c:choose>
+														<c:when test="${cate.status == 1}">
+															<option value="${cate.id}">${cate.name}</option>
+														</c:when>
+														</c:choose>
+																								
 														</c:forEach>
 													</select>
 												</div>

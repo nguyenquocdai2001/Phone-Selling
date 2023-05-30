@@ -23,7 +23,7 @@
 									<h4 class="card-title">Upcate Category</h4>
 								</div>
 								<div class="card-body">
-									<form action="category/${category.id}/edit" method="POST">
+									<form action="category/${category.id}/edit" method="POST" enctype="multipart/form-data">
 										<input type="hidden" name="id" value="${category.id}">
 										<div class="row">
 											<div class="col-md-6 pr-1">
@@ -56,9 +56,10 @@
 											</div>
 											<div class="col-md-4 px-1">
 												<div class="form-group">
-													<label>Image</label> <input type="text"
-														value="${category.image}" name="image"
-														class="form-control" placeholder="Image name">
+													<label for="file">Image</label>  
+													<input class="form-control" type="file" id="file" name="file" 
+													value="${pageContext.request.contextPath}/template/admin/upload/${category.image}"
+													required/>
 												</div>
 											</div>
 

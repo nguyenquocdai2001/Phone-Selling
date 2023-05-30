@@ -8,11 +8,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +17,7 @@ import com.phone.model.Category;
 public class CateDAOImpl implements CateDAO {
 
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
-	DataSource dataSource = (DataSource) context.getBean("myDataSource");
+ DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
 	@Override
 	public void addCategory(Category category) {
@@ -134,7 +130,7 @@ public class CateDAOImpl implements CateDAO {
 	public List<Category> getLimitCategory() {
 		List<Category> list = new ArrayList<>();
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT TOP 4 * FROM categories WHERE status=1");
+				PreparedStatement statement = connection.prepareStatement("SELECT TOP 5 * FROM categories WHERE status=1");
 				ResultSet rs = statement.executeQuery()) {
 			while (rs.next()) {
 				Category cate = new Category();

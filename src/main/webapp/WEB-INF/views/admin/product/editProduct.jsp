@@ -31,10 +31,13 @@
 													<label>Category</label> <select class="form-control" 
 													required name="category_id" id="category_id">
 														<option value="" selected>Category</option>
-														<c:forEach var="cate" items="${listCate}">
-															<option value="${cate.id}"
-														${product.category_id == cate.id ? 'selected' : ''}>${cate.name}</option>	
-																										
+														<c:forEach var="cate" items="${listCate}">															
+															<c:choose>
+														<c:when test="${cate.status == 1}">
+														<option value="${cate.id}"
+															${product.category_id == cate.id  ? 'selected' : ''}>${cate.name}</option>	
+														</c:when>
+														</c:choose>																								
 														</c:forEach>
 													</select>
 													
@@ -99,14 +102,16 @@
 
 											<div class="col-md-4 px-1">
 												<div class="form-group">
-													<label for="file">Image</label> <input class="form-control"
-													value="${product.image}" type="file" id="file" name="file" required />
+													<label class="" for="file">Image</label> 
+													<input class="form-control"
+													value="${product.image}" type="file" name="file" id="file" required />
+													
 												</div>
 											</div>
 
 										</div>
 										<div class="row">
-											<div class="col-md-6 mb-3"">
+											<div class="col-md-6 mb-3">
 												<div class="form-group">
 													<label>Quantity</label> <input type="number" 
 														value="${product.quantity}" name="quantity" class="form-control" placeholder="Quantity" required/>
@@ -162,6 +167,7 @@
 			<%@ include file="/common/admin/footer.jsp"%>
 		</div>
 	</div>
+	
 </body>
 <%@ include file="/common/admin/script.jsp"%>
 </html>
