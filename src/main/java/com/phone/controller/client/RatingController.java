@@ -62,9 +62,16 @@ public class RatingController {
 				return "client/product/view";
 			}
     	}
-    	Product product = productDAO.getProductById(id);      
-		modelMap.addAttribute("product", product);
-    	return "client/product/view";
+		Product product = productDAO.getProductById(id);
+		List<Integer> list = ratingDAO.getRateByProductId(id);
+		List<Review> listReview=reviewDAO.getAllReview(id);
+		int rateNum = list.size();
+		double average = list.stream().mapToInt(Integer::intValue).average().orElse(0);
+		modelMap.addAttribute("product", product)
+		.addAttribute("rateNum", rateNum)
+		.addAttribute("rate", average)
+		.addAttribute("listReview", listReview);
+		return "client/product/view";
 	}
 
 	@PostMapping("/add-rating")

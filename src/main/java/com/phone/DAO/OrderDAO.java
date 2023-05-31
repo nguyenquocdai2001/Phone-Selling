@@ -9,4 +9,5 @@ public interface OrderDAO {
 	void saveOrder(Order order);
 	List<Order> getAllOrderByUserID(int userID);
 	List<Order> getAllOrder();
+	void saveStatus(String orderID);
 }

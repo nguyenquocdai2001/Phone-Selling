@@ -26,11 +26,11 @@
 						href="${pageContext.request.contextPath}/logout">LOG OUT</a>
 				 </li>
 				<li class="secondary-nav"><a
-					href="${pageContext.request.contextPath}/changePassword/${userSession.id}">CHANGE
+					href="${pageContext.request.contextPath}/changePasswordUser/${userSession.id}">CHANGE
 						PASSWORD</a></li>
 						<li class="secondary-nav"><a href="${pageContext.request.contextPath}/historyUser">HISTORY</a></li>
 				<li class="secondary-nav"><a
-					href="${pageContext.request.contextPath}/editProfile/${userSession.id}"><c:out
+					href="${pageContext.request.contextPath}/editProfileUser/${userSession.id}"><c:out
 							value="${helloUser}" /></a></li>
 				<li class="secondary-nav"><a href=""></a></li>
 			</c:if>

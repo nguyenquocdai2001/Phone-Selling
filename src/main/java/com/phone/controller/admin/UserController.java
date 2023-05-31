@@ -214,6 +214,8 @@ public class UserController {
 					// truyền lại dữ liệu thông qua "users" vì nó sẽ trả về lại trang 1 lần nữa
 					model.addAttribute("users", users.get());
 				}
+				// session này dùng cho hiển thị fullname của người dùng ở header
+				session.setAttribute("helloUser", users.get().getName());
 
 				return "./admin/users/edit-profile";
 			} else {
@@ -229,6 +231,64 @@ public class UserController {
 		}
 		return "./admin/users/login";
 	}
+	
+	//--------------------------------------------------------Profile User view----------------------------------------------------------------------	
+		@GetMapping("/editProfileUser/{id}")
+		public String editProfleUser(@PathVariable("id") int id, Model model, HttpSession session) {
+			if (session.getAttribute("userSession") != null) {
+				User user = userDAO.getUserById(id);
+				model.addAttribute("users", user);
+				return "./client/users/edit-profile";
+			}
+			return "./client/users/login";
+		}
+
+		@PostMapping("/editProfileUser")
+		public String editProfleUser(@RequestParam(required = false, name = "name") String name,
+				@RequestParam(required = false, name = "email") String email,
+				@RequestParam(required = false, name = "phone") String phone,
+				@RequestParam(required = false, name = "address") String address, @ModelAttribute("user") User user,
+				Model model, HttpSession session) {
+
+			if (session.getAttribute("userSession") != null) {
+				User foundUser = userDAO.getUserByEmail(user.getEmail()).get();
+
+				// Lưu email vào biến email2
+				String email2 = foundUser.getEmail();
+
+				if (userDAO.editProfile(name, email, phone, address, model)) {
+					System.out.println("Edit thanh cong");
+					foundUser.setName(name);
+					foundUser.setEmail(email);
+					foundUser.setPhone(phone);
+					foundUser.setAddress(address);
+
+					userDAO.updateUser(foundUser);
+
+					
+					Optional<User> users = userDAO.getUserByEmail(email2);
+					if (users.isPresent()) {
+						// truyền lại dữ liệu thông qua "users" vì nó sẽ trả về lại trang 1 lần nữa
+						model.addAttribute("users", users.get());
+					}
+					// session này dùng cho hiển thị fullname của người dùng ở header
+					session.setAttribute("helloUser", users.get().getName());
+
+					return "./client/users/edit-profile";
+				} else {
+					System.out.println("Edit that bai");
+				}
+
+				// truyền lại dữ liệu thông qua "users" vì nó sẽ trả về lại trang 1 lần nữa
+				Optional<User> users = userDAO.getUserByEmail(email2);
+				if (users.isPresent()) {
+					model.addAttribute("users", users.get());
+				}
+				return "./client/users/edit-profile";
+			}
+			return "./client/users/login";
+		}
+
 
 	// ---------------------------------------Change password---------------------------------------------------------------
 	@GetMapping("/changePassword/{id}")
@@ -290,4 +350,67 @@ public class UserController {
 		return "./admin/users/login";
 
 	}
+	
+	// ---------------------------------------Change password User view---------------------------------------------------------------
+		@GetMapping("/changePasswordUser/{id}")
+		public String changePasswordUser(@PathVariable("id") int id, Model model, HttpSession session) {
+
+			if (session.getAttribute("userSession") != null) {
+				return "./client/users/change-password";
+			}
+			return "./client/users/login";
+		}
+
+		@PostMapping("/checkChangePasswordUser")
+		public String checkChangePasswordUser(@RequestParam(required = false, name = "OldPassword") String OldPassword,
+				@RequestParam(required = false, name = "ConfirmNewPassword") String confirmNewPassword,
+				@RequestParam(required = false, name = "NewPassword") String NewPassword, @ModelAttribute("user") User user,
+				@RequestParam(required = false, name = "email") String email, Model model, HttpSession session) {
+			if (session.getAttribute("userSession") != null) {
+				
+				String NewEncryptedpassword = null;
+				try {
+					/* MessageDigest instance for MD5. */
+					MessageDigest m = MessageDigest.getInstance("MD5");
+
+					/* Add plain-text password bytes to digest using MD5 update() method. */
+					m.update(NewPassword.getBytes());
+
+					/* Convert the hash value into bytes */
+					byte[] bytes = m.digest();
+
+					/*
+					 * The bytes array has bytes in decimal form. Converting it into hexadecimal
+					 * format.
+					 */
+					StringBuilder s = new StringBuilder();
+					for (int i = 0; i < bytes.length; i++) {
+						s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+					}
+
+					/* Complete hashed password in hexadecimal format */
+					NewEncryptedpassword = s.toString();
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+				}
+
+				if (userDAO.changePassword(OldPassword, NewPassword, confirmNewPassword, email, model)) {
+					System.out.println("change pass thanh cong");
+
+					User foundUser = userDAO.getUserByEmail(user.getEmail()).get();
+					foundUser.setPassword(NewEncryptedpassword);
+
+					userDAO.saveChangePassword(foundUser);
+
+					return "./client/users/change-password";
+				} else {
+					System.out.println("change pass that bai");
+				}
+				return "./client/users/change-password";
+			}
+			return "./client/users/login";
+
+		}
+		
+		
 }

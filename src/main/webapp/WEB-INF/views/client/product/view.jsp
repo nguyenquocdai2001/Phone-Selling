@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%
 double rate = (double) pageContext.findAttribute("rate");
 int ratenum = (int) Math.round(rate);
 int rateNum = (int) pageContext.findAttribute("rateNum");
 %>
+
 
 <!DOCTYPE html>
 <html lang="en">

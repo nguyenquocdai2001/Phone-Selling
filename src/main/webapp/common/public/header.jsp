@@ -35,9 +35,9 @@
 					href="${pageContext.request.contextPath}/logout"> <span
 					class="no-icon">LOG OUT</span></a>
 			  </li>
-	          <li class="secondary-nav"><a href="${pageContext.request.contextPath}/changePassword/${userSession.id}">CHANGE PASSWORD</a></li>
+	          <li class="secondary-nav"><a href="${pageContext.request.contextPath}/changePasswordUser/${userSession.id}">CHANGE PASSWORD</a></li>
 	          <li class="secondary-nav"><a href="${pageContext.request.contextPath}/historyUser">HISTORY</a></li>
-	          <li class="secondary-nav"><a href="${pageContext.request.contextPath}/editProfile/${userSession.id}"><c:out value="${helloUser}" /></a></li>
+	          <li class="secondary-nav"><a href="${pageContext.request.contextPath}/editProfileUser/${userSession.id}"><c:out value="${helloUser}" /></a></li>
           </c:if>
         </ul>
       </nav>

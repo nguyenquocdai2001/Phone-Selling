@@ -376,4 +376,22 @@ public class HomeController {
   	  	    	}
   	  	  		return "./client/users/login";
   		    }
+  			
+  		//--------------------update status order--------------------------------------
+  			@RequestMapping(value = "/UpdateStatusOrder/{orderID}", method = RequestMethod.GET)
+  		    public String UpdateStatusOrder(ModelMap modelMap, HttpSession session, @PathVariable String orderID) {
+  				
+  				if (session.getAttribute("userSession") != null) {
+  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
+  	  				if (loggedInUser.getRole().equals("admin")) {
+  	  					
+	  	  				orderDAO.saveStatus(orderID);
+	  	  				
+  	  					return "redirect:/getAllOrderAdmin";
+  	  				} else {  			
+	  				    return "redirect:/clienthome"; 
+  	  				}
+  	  	    	}
+  	  	  		return "./client/users/login";
+  		    }
 }

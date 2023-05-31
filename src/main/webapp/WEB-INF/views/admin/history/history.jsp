@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>History</title>
+<title>Orders</title>
 <%@ include file="/common/admin/link.jsp"%>
 
 
@@ -54,6 +54,8 @@
 													<td>${order.totalPrice}</td>
 													<td><a class="btn btn-dark btn-sm"
 														href="${pageContext.request.contextPath}/detailOrderUserByAdmin/${order.id}">Details</a>
+														<a class="btn btn-dark btn-sm"
+														href="${pageContext.request.contextPath}/UpdateStatusOrder/${order.id}">Paid</a>
 												</tr>
 
 											</c:forEach>

@@ -7,19 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Detail History User</title>
         <%@ include file="/common/public/info/linkinfo.jsp"%>
-        
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-        <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
-        <!-- Popper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     </head>
 <body>
 	
@@ -32,12 +20,12 @@
 
             <table class="table table-striped table-borderless table-hover text-center">
                 <thead>
-                    <tr class="text-dark bg-dark">
-                    	<th class="text-center text-light">ID</th>
-                    	<th class="text-center text-light">Name product</th>
-                    	<th class="text-center text-light">Quantity</th>
-                        <th class="text-center text-light">Price</th>
-                        <th class="text-center text-light">Created at</th>
+                    <tr class="text-dark ">
+                    	<th class="text-center ">ID</th>
+                    	<th class="text-center ">Name product</th>
+                    	<th class="text-center ">Quantity</th>
+                        <th class="text-center ">Price</th>
+                        <th class="text-center ">Created at</th>
                     </tr>
                 </thead>
                 <tbody>
