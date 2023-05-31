@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,7 +45,9 @@
 												<td class="text-left">${ItemOrder.id}</td>
 												<td class="text-left">${ItemOrder.nameProduct}</td>
 												<td class="text-left">${ItemOrder.orderItemQty}</td>
-												<td class="text-left">${ItemOrder.price}</td>
+												<td class="text-left"><fmt:formatNumber
+														value="${ItemOrder.price}" type="currency"
+														currencyCode="VND" /></td>
 												<td class="text-center">${ItemOrder.created_at}</td>
 
 											</tr>

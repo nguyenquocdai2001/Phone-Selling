@@ -113,7 +113,7 @@
 											<div class="col-md-6 mb-3">
 												<div class="form-group">
 													<label>Quantity</label> <input type="number" 
-														value="${product.quantity}" name="quantity" class="form-control" placeholder="Quantity" required/>
+													min="0"	value="${product.quantity}" name="quantity" class="form-control" placeholder="Quantity" required/>
 												</div>
 											</div>
 										</div>

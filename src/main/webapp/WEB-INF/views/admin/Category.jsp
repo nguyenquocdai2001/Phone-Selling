@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 									<p class="card-category">Here is all category that we have</p>
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table id="category"class="table table-hover table-striped">
+									<table id="category" class="table table-hover table-striped">
 										<thead>
 											<th>ID</th>
 											<th>Name</th>
@@ -71,28 +72,30 @@
 									<p class="card-category">Here</p>
 								</div>
 								<div class="card-body table-full-width table-responsive">
-									<table id="product"class="table table-hover">
-										<thead>																					
+									<table id="product" class="table table-hover">
+										<thead>
 											<th>Name</th>
 											<th>Category</th>
 											<th>Description</th>
 											<th>Status</th>
 											<th>Original price</th>
-											<th>Selling price</th>										
+											<th>Selling price</th>
 											<th>Quantity</th>
 											<th>Trending</th>
 											<th>Image</th>
 											<th>Action</th>
 										</thead>
 										<tbody>
-												<c:forEach var="product" items="${listProduct}">
-												<tr>												
+											<c:forEach var="product" items="${listProduct}">
+												<tr>
 													<td>${product.name}</td>
 													<td>${product.categoryName}</td>
 													<td>${product.description}</td>
 													<td>${product.status == '0' ? 'Stop' : 'Selling'}</td>
-													<td>${product.og_price}</td>
-													<td>${product.selling_price}</td>
+													<td><fmt:formatNumber value="${product.og_price}"
+															type="currency" currencyCode="VND" /></td>
+													<td><fmt:formatNumber value="${product.selling_price}"
+															type="currency" currencyCode="VND" /></td>
 													<td>${product.quantity}</td>
 													<td>${product.trending == '0' ? 'No' : 'Trending'}</td>
 													<td><img class="img" height="60px" width="60px"
