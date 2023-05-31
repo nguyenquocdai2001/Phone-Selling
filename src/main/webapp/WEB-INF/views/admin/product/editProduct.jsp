@@ -102,14 +102,15 @@
 
 											<div class="col-md-4 px-1">
 												<div class="form-group">
-													<label for="file">Image</label> <input class="form-control"
-													value="${product.image}" type="file" id="file" name="file" required />
+													<label class=""  for="file">Image</label> 	
+												<input type="hidden" name="image" value="${product.image}"/>									
+													<input class="form-control" type="file" name="file" id="file"  />						
 												</div>
 											</div>
 
 										</div>
 										<div class="row">
-											<div class="col-md-6 mb-3"">
+											<div class="col-md-6 mb-3">
 												<div class="form-group">
 													<label>Quantity</label> <input type="number" 
 														value="${product.quantity}" name="quantity" class="form-control" placeholder="Quantity" required/>
@@ -165,6 +166,7 @@
 			<%@ include file="/common/admin/footer.jsp"%>
 		</div>
 	</div>
+	
 </body>
 <%@ include file="/common/admin/script.jsp"%>
 </html>

@@ -2,18 +2,18 @@ package com.phone.model;
 
 public class CartItem {
 	private Integer id;
-	private int userID;
-	private int productID;
-	private int qty = 1;
+	private int user_id;
+	private int prod_id;
+	private int qty ;
 	private String name;
 	private double price;
 	
 	
-	public CartItem(Integer id, int userID, int productID, int qty, String name, double price) {
+	public CartItem(Integer id, int user_id, int prod_id, int qty, String name, double price) {
 		super();
 		this.id = id;
-		this.userID = userID;
-		this.productID = productID;
+		this.user_id = user_id;
+		this.prod_id = prod_id;
 		this.qty = qty;
 		this.name = name;
 		this.price = price;
@@ -38,16 +38,16 @@ public class CartItem {
 		this.id = id;
 	}
 	public int getUserID() {
-		return userID;
+		return user_id;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUserID(int user_id) {
+		this.user_id = user_id;
 	}
 	public int getProductID() {
-		return productID;
+		return prod_id;
 	}
-	public void setProductID(int productID) {
-		this.productID = productID;
+	public void setProductID(int prod_id) {
+		this.prod_id = prod_id;
 	}
 	public int getQty() {
 		return qty;

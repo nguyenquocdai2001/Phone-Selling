@@ -57,9 +57,10 @@
 											<div class="col-md-4 px-1">
 												<div class="form-group">
 													<label for="file">Image</label>  
+													<input type="hidden" name="image" value="${category.image}"/>		
 													<input class="form-control" type="file" id="file" name="file" 
 													value="${pageContext.request.contextPath}/template/admin/upload/${category.image}"
-													required/>
+													/>
 												</div>
 											</div>
 

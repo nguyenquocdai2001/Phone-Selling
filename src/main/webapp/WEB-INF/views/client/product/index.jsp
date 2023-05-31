@@ -36,7 +36,7 @@ a {
 						<c:choose>
 							<c:when test="${sameCategory}">
 								<a style="color: white !important;" 
-									href="${pageContext.request.contextPath}/category">Category</a> / <a
+									href="${pageContext.request.contextPath}/allCategory">Category</a> / <a
 									style="color: white !important;"
 									href="${pageContext.request.contextPath}/allProduct">${listProduct[0].categoryName}</a>
 							</c:when>
@@ -71,9 +71,19 @@ a {
 													</c:choose>"
 											alt="" />
 										<div class="card-body">
-											<h5>${product.name}</h5>
-											<span class="float-start">${product.selling_price}</span> <span
-												class="float-end"><s>${product.og_price}</s></span>
+											<h5>${product.name}
+											<c:choose>
+											<c:when test="${product.quantity > 0}">
+												<label class=" badge bg-success">In stock</label>
+											</c:when>
+												<c:otherwise>
+													<label class="badge bg-danger">Run out</label>
+												</c:otherwise>
+											</c:choose>
+												
+											</h5>
+											<span class="float-start">${product.selling_price}$</span> <span
+												class="float-end"><s>${product.og_price}$</s></span>
 										</div>
 									</div>
 								</a>

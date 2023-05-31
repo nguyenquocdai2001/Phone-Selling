@@ -156,6 +156,20 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
+	public void updateProductAfterSelling(Product product) {
+		
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("UPDATE products SET qty = ? WHERE id = ?")) {
+			preparedStatement.setInt(1, product.getQuantity());
+			preparedStatement.setInt(2, product.getId());
+			preparedStatement.executeUpdate();
+			System.out.println("So luong product có id: "+product.getId() +" con lai "+product.getQuantity());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public List<Product> getPhone() {
 		List<Product> products = new ArrayList<>();
 		try (Connection connection = dataSource.getConnection();
@@ -241,28 +255,26 @@ public class ProductDAOImpl implements ProductDAO {
 		return products;
 	}
 
-	@Override
-	public List<String> search(String keyword) {
-		 List<String> suggestions = new ArrayList<>();
-	        
-	        try (Connection connection = dataSource.getConnection();
-	             PreparedStatement statement = connection.prepareStatement("SELECT name FROM products WHERE name LIKE ?")) {
-	            
-	            statement.setString(1, keyword + "%");
-	            ResultSet resultSet = statement.executeQuery();
-	            
-	            while (resultSet.next()) {
-	                suggestions.add(resultSet.getString("name"));
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	        
-	        return suggestions;
-	}
 
+//	@Override
+//	public List<String> search(String keyword) {
+//		 List<String> suggestions = new ArrayList<>();
+//	        
+//	        try (Connection connection = dataSource.getConnection();
+//	             PreparedStatement statement = connection.prepareStatement("SELECT name FROM products WHERE name LIKE ?")) {
+//	            
+//	            statement.setString(1, keyword + "%");
+//	            ResultSet resultSet = statement.executeQuery();
+//	            
+//	            while (resultSet.next()) {
+//	                suggestions.add(resultSet.getString("name"));
+//	            }
+//	        } catch (SQLException e) {
+//	            e.printStackTrace();
+//	        }
+//	        
+//	        return suggestions;
+//	}
 
-
-	
 
 }

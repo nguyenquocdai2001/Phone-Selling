@@ -5,27 +5,39 @@
 <html>
 
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>Register Page</title>
-<%@ include file="/common/admin/link.jsp"%>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
+         <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<%@ include file="/common/public/info/linkinfo.jsp"%>
 </head>
 <body>
-	<div class="wrapper">
-		<%@ include file="/common/admin/sidebar.jsp"%>
-		<div class="main-panel">
-			<%@ include file="/common/admin/header.jsp"%>
+	<div class="se-pre-con"></div>
+	<%@ include file="/common/public/info/headerinfo.jsp"%>
 
 			<div class="container" style="margin-top: 30px; margin-bottom: 30px;">
 				<div class="row bg-light"
-					style="border: 1px darkgrey solid; border-radius: 10px; width: 50%; margin: 0 auto; padding: 20px;">
+					style="border: 1px darkgrey solid; border-radius: 10px; margin-left: 40px;">
 					<div class="col-sm-12">
 						<header class="text-center py-3 rounded ">
 							<h1 class="display-5 font-weight-bold text-secondary text-center">Sign
 								up</h1>
 						</header>
-						<form action="checkRegister" method="POST">
+						<form action="${pageContext.request.contextPath}/checkRegister" method="POST">
 							<div class="row register-form">
-								<div class="col-md-6">
+								<div class="col-md-5">
 									<div class="form-group">
 										<label class="text-dark ">Email</label> <input type="text"
 											class="form-control" name="email" placeholder="Enter Email"
@@ -44,7 +56,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-6">
+								<div class="col-md-5">
 									<div class="form-group">
 										<label class="text-dark ">Fullname</label> <input type="text"
 											class="form-control" name="name" placeholder="Enter Fullname"
@@ -86,10 +98,6 @@
 					</div>
 				</div>
 			</div>
-			<%@ include file="/common/admin/footer.jsp"%>
-		</div>
-	</div>
 </body>
-<%@ include file="/common/admin/script.jsp"%>
 </html>
 

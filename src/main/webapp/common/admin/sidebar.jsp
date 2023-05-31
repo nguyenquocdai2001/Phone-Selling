@@ -42,14 +42,26 @@
                     <c:set var="userRole" value="${userRole}"/>
 
 					<c:if test="${userRole == 'admin'}">
-	               <li>
-                        <a class="nav-link" href="${pageContext.request.contextPath}/product">
-                            <i class="nc-icon nc-mobile"></i>
-                            <p>Add Product</p>
-						</a>
-					</li>
+
+		               <li>
+	                        <a class="nav-link" href="./product">
+	                            <i class="nc-icon nc-mobile"></i>
+	                            <p>Add Product</p>
+							</a>
+						</li>
                     </c:if>
-                              
+                    
+                 	<c:if test="${userRole == 'admin'}">
+	                    <li>
+	                        <a class="nav-link" href="${pageContext.request.contextPath}/getAllOrderAdmin">
+	                            <i class="nc-icon nc-atom"></i>
+	                            <p>Orders</p>
+	
+	                        </a>
+	                    </li>
+                    </c:if>
+                
+                 
                 </ul>
             </div>
         </div>

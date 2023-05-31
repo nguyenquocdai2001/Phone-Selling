@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.phone.DAO.CartItemDAO;
 import com.phone.DAO.UserDAO;
 import com.phone.model.User;
 
@@ -29,6 +30,7 @@ public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
 
 	UserDAO client = (UserDAO) context.getBean("UserDAOImpl");
+	CartItemDAO cartItemDAO = (CartItemDAO) context.getBean("CartItemDAOImpl");
 
 	@Autowired
 	@Lazy
@@ -153,9 +155,10 @@ public class UserController {
 	// ----------------------------------------------------------------Logout----------------------------------------------------------------------
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		
 		session.invalidate();
 		System.out.println("Logout thanh cong");
-		return "./admin/users/login";
+		return "redirect:/clienthome";
 	}
 
 	// ----------------------------------------------------Detail user------------------------------------------------------------
@@ -205,9 +208,10 @@ public class UserController {
 
 				userDAO.updateUser(foundUser);
 
-				// truyền lại dữ liệu thông qua "users" vì nó sẽ trả về lại trang 1 lần nữa
+				
 				Optional<User> users = userDAO.getUserByEmail(email2);
 				if (users.isPresent()) {
+					// truyền lại dữ liệu thông qua "users" vì nó sẽ trả về lại trang 1 lần nữa
 					model.addAttribute("users", users.get());
 				}
 

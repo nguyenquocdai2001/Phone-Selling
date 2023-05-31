@@ -24,3 +24,4 @@
 <script src="<c:url value='/template/public/js/preloader.js'/>"></script>
 <script src="<c:url value='/template/public/js/quantity.js'/>"></script>
 <script src="<c:url value='/template/public/js/bootstrap.bundle.min.js'/>"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -12,8 +12,11 @@ public interface ProductDAO {
 	    List<Product> getAllProducts();
 	    List<Product> getAllProductsClient();
 	    List<Product> getTrendingProduct();
+
+	    void updateProductAfterSelling(Product product);
+
 	    List<Product> getPhone();
 	    List<Product> getOther();
 	    List<Product> getByCateID(int id);
-	    List<String> search(String keyword);
+
 }
