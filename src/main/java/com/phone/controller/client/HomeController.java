@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.phone.DAO.CartItemDAO;
 import com.phone.DAO.CateDAO;
@@ -273,7 +274,7 @@ public class HomeController {
   					@RequestParam("name") String name,
   					@RequestParam("phone") String phone,
   					@RequestParam("address") String address, 
-  					@RequestParam("totalPrice") double totalPrice, HttpSession session) {
+  					@RequestParam("totalPrice") double totalPrice, HttpSession session, RedirectAttributes redirectAttributes) {
   				
   				if (session.getAttribute("userSession") != null) {
   	  		    	User loggedInUser = (User) session.getAttribute("userSession");
@@ -318,7 +319,8 @@ public class HomeController {
   	    				//clear cart khi đã check out xong
   	    				cartItemDAO.clear(loggedInUser.getId());
   	    				
-  	    				return "redirect:/clienthome";
+  	    				redirectAttributes.addFlashAttribute("status", "Check out successfully");
+  	    				return "redirect:/checkout";
   	  				}
   	  	    	}
   	  	  		return "./client/users/login";
@@ -399,14 +401,15 @@ public class HomeController {
   			
   		//--------------------update status order--------------------------------------
   			@RequestMapping(value = "/UpdateStatusOrder/{orderID}", method = RequestMethod.GET)
-  		    public String UpdateStatusOrder(ModelMap modelMap, HttpSession session, @PathVariable String orderID) {
+  		    public String UpdateStatusOrder(ModelMap modelMap, HttpSession session, @PathVariable String orderID,
+  		    		RedirectAttributes redirectAttributes) {
   				
   				if (session.getAttribute("userSession") != null) {
   	  		    	User loggedInUser = (User) session.getAttribute("userSession");
   	  				if (loggedInUser.getRole().equals("admin")) {
   	  					
 	  	  				orderDAO.saveStatus(orderID);
-	  	  				
+	  	  				redirectAttributes.addFlashAttribute("status", "Update status successfully");
   	  					return "redirect:/getAllOrderAdmin";
   	  				} else {  			
 	  				    return "redirect:/clienthome"; 

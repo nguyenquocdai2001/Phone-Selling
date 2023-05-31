@@ -27,7 +27,7 @@
 								</div>
 								<div class="card-body table-full-width table-responsive">
 									<table
-										class="table table-striped table-borderless table-hover text-center">
+										class="table table-striped table-borderless table-hover text-center" id="orders">
 										<thead>
 											<tr class="text-dark">
 												<th class="text-center text-dark">User ID</th>
@@ -72,5 +72,11 @@
 	</div>
 
 </body>
+
 <%@ include file="/common/admin/script.jsp"%>
+<c:if test="${not empty status}">
+        <script>
+            swal("${status}");
+        </script>
+    </c:if>
 </html>

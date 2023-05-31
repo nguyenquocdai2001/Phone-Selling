@@ -20,6 +20,7 @@
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script
 	src="<c:url value='/template/admin/js/light-bootstrap-dashboard.js?v=2.0.0'/>"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	
 <script type="text/javascript">
 $(document).ready(function () {
@@ -27,5 +28,8 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     $('#category').DataTable();
+});
+$(document).ready(function () {
+    $('#orders').DataTable();
 });
 </script>

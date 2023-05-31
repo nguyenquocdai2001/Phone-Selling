@@ -92,7 +92,7 @@ public class OrderDAOImpl implements OrderDAO{
             	order.setStatus(resultSet.getInt("status"));
             	order.setTotalPrice(resultSet.getDouble("total_price"));
             	orderList.add(order);
-            	System.out.println("get order thanh cong");
+            	
             }
         } catch (SQLException e) {
             e.printStackTrace();
