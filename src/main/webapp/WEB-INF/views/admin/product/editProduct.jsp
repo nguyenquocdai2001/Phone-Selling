@@ -102,10 +102,9 @@
 
 											<div class="col-md-4 px-1">
 												<div class="form-group">
-													<label class="" for="file">Image</label> 
-													<input class="form-control"
-													value="${product.image}" type="file" name="file" id="file" required />
-													
+													<label class=""  for="file">Image</label> 	
+												<input type="hidden" name="image" value="${product.image}"/>									
+													<input class="form-control" type="file" name="file" id="file"  />						
 												</div>
 											</div>
 

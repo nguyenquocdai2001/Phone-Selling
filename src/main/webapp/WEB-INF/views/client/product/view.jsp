@@ -89,18 +89,17 @@ a {
 					<a style="color: #ebf0f5 !important"
 						href="${pageContext.request.contextPath}/category"> Category </a>/
 					<a style="color: #ebf0f5 !important"
-						href="${pageContext.request.contextPath}/category/${product.categoryName}">
-						${product.categoryName} </a>/ <a style="color: #ebf0f5 !important"
-						href="${pageContext.request.contextPath}/category/${product.categoryName}">
+						href="${pageContext.request.contextPath}/category/${product.category_id}">
+						${product.categoryName} </a>/ <a style="color: #ebf0f5 !important">
 						${product.name} </a>
 				</h6>
 			</div>
 		</div>
 
-		<div class="container pb-5">
+		<div class="container pb-5">	
 			<div class="card shadow">
 				<div class="card-body">
-					<div class="row">
+					<div class="row">					
 						<div class="col-md-3 border-right">
 							<img
 								src="${pageContext.request.contextPath}/template/admin/upload/
@@ -129,7 +128,8 @@ a {
 
 							<lable class="me-3"> Original Price : <s>${product.og_price}$</s>
 							</lable>
-							<lable class="fw-bold">Selling Price :
+							<input type="hidden" name="price" value="${product.selling_price}">						
+							<lable  class="fw-bold">Selling Price :
 							${product.selling_price}$</lable>
 
 							<div class="rating mt-2">
@@ -175,8 +175,8 @@ a {
 									<div class="input-group text-center mb-3">
 										<input class="input-group-text" type="button" value="-"
 											onclick="decreaseQuantity()" /> <input
-											class="form-control text-center" type="text" id="quantity"
-											value="1" /> <input class="input-group-text" type="button"
+											class="form-control text-center" type="text" id="quantity" name="qty"
+											value="1"/> <input class="input-group-text" type="button"
 											value="+" onclick="increaseQuantity()" />
 									</div>
 								</div>
@@ -186,7 +186,7 @@ a {
 											<a class="btn btn-dark  me-3 float-start"
 												href="${pageContext.request.contextPath}/add/${product.id}">Add to cart<i
 												class="fa fa-shopping-cart"></i>
-											</a> &nbsp; &nbsp; 
+											</a>&nbsp; &nbsp; 
 								</c:when>
 									</c:choose>
 									<a class="btn btn-light me-3 float-start" href="">Add to
@@ -246,8 +246,14 @@ a {
 					</div>
 				</div>
 			</div>
+			
 		</div>
+		
 	</section>
-
+   <c:if test="${not empty status}">
+        <script>
+            swal("${status}");
+        </script>
+    </c:if>
 </body>
 </html>

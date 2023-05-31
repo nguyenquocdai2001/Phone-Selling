@@ -19,6 +19,7 @@ public class ProductDAOImpl implements ProductDAO {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
 	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
+	
 	@Override
 	public void addProduct(Product product) {
 		try (Connection connection = dataSource.getConnection();
@@ -253,4 +254,27 @@ public class ProductDAOImpl implements ProductDAO {
 
 		return products;
 	}
+
+
+//	@Override
+//	public List<String> search(String keyword) {
+//		 List<String> suggestions = new ArrayList<>();
+//	        
+//	        try (Connection connection = dataSource.getConnection();
+//	             PreparedStatement statement = connection.prepareStatement("SELECT name FROM products WHERE name LIKE ?")) {
+//	            
+//	            statement.setString(1, keyword + "%");
+//	            ResultSet resultSet = statement.executeQuery();
+//	            
+//	            while (resultSet.next()) {
+//	                suggestions.add(resultSet.getString("name"));
+//	            }
+//	        } catch (SQLException e) {
+//	            e.printStackTrace();
+//	        }
+//	        
+//	        return suggestions;
+//	}
+
+
 }

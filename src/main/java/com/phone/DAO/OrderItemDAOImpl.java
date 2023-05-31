@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.phone.model.Order;
 import com.phone.model.OrderItem;
+import com.phone.model.Product;
 
 public class OrderItemDAOImpl implements OrderItemDAO{
 	
@@ -69,6 +70,33 @@ public class OrderItemDAOImpl implements OrderItemDAO{
             e.printStackTrace();
         }
         return orderItemList;
+	}
+
+	@Override
+	public OrderItem checkOrder(int user_id, int prod_id) {
+		OrderItem orderItem = null;
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT r.*"
+						+ "FROM order_details r "
+						+ "JOIN orders p ON r.order_id = p.id where p.user_id = ? and r.prod_id= ?")) {
+			preparedStatement.setInt(1, user_id);
+			preparedStatement.setInt(2, prod_id);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					orderItem = new OrderItem();
+					orderItem.setId(resultSet.getInt("id"));            	
+	            	orderItem.setOrderID(resultSet.getString("order_id"));
+	            	orderItem.setProductID(resultSet.getInt("prod_id"));
+	            	orderItem.setOrderItemQty(resultSet.getInt("qty"));	
+	            	orderItem.setPrice(resultSet.getDouble("price"));
+	            	orderItem.setCreated_at(resultSet.getString("created_at"));          	
+	            	System.out.println("get item order thanh cong");
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orderItem;
 	}
 
 }

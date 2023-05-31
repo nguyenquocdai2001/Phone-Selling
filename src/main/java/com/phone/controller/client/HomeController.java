@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.phone.DAO.CartItemDAO;
@@ -27,7 +28,7 @@ import com.phone.DAO.RatingDAO;
 import com.phone.DAO.UserDAO;
 import com.phone.model.Product;
 import com.phone.model.Rate_prod;
-
+import com.phone.model.Review;
 import com.phone.DAO.UserDAO;
 import com.phone.model.Product;
 import com.phone.model.User;
@@ -101,6 +102,16 @@ public class HomeController {
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
+    
+
+	@RequestMapping(value = "/allCategory", method = RequestMethod.GET)
+	public ModelAndView categoryPage(ModelMap modelmap) {
+		ModelAndView mav = new ModelAndView("client/product/allCategory");
+		List<Category> listCate = new ArrayList<>(); 
+		listCate = cateDAO.getAllCategory();
+		modelmap.addAttribute("listCate", listCate);
+		return mav;
+	}
 	
 	@RequestMapping(value = "/phone", method = RequestMethod.GET)
 	public ModelAndView phonePage(ModelMap modelmap) {
@@ -128,6 +139,16 @@ public class HomeController {
 		return mav;
 	}
 
+	/*
+	 * <<<<<<< HEAD
+	 * 
+	 * @RequestMapping(value = "/search", method = RequestMethod.GET)
+	 * 
+	 * @ResponseBody public List<String> searchAutocomplete(@RequestParam("keyword")
+	 * String keyword) { return productDAO.search(keyword); } =======
+	 * 
+	 * >>>>>>> 3fa268643ded1dc3841fc05e2f59d1e8ac515664
+	 */
   //-----------------------------------------------------------View cart---------------------------------------------------------
   	@GetMapping("views")
   	public String viewCarts(Model model, HttpSession session) {
@@ -164,8 +185,7 @@ public class HomeController {
 		  			item.setPrice(product.getSelling_price());
 		  			item.setUserID(loggedInUser.getId());
 		  			item.setQty(1);
-		  			cartItemDAO.add(item);
-		  			
+		  			cartItemDAO.add(item);		  			
 		  		}
 		  		return "redirect:/info/" + tmpID;
 			}
@@ -173,7 +193,7 @@ public class HomeController {
   		return "./client/users/login";
   		
   	}
-  	
+
   //-----------------------------------------------------------Clear cart---------------------------------------------------------
   	@GetMapping("clear")
   	public String clearCart(HttpSession session) {

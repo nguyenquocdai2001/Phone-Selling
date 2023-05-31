@@ -10,7 +10,6 @@ public class OrderItem {
 	private double price;
 	private String created_at = LocalDateTime.now().toString();
 	private LocalDateTime updated_at;
-	
 	private String nameProduct;
 	private String nameCategory;
 	

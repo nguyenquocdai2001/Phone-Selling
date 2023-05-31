@@ -83,7 +83,7 @@ public class RatingDAOImpl implements RatingDAO {
 	@Override
 	public List<Integer> getRateByProductId(int id) {
 		List<Integer> list = new ArrayList<>();
-		String query = "select stars_rated from rate_prod where  prod_id = ?";
+		String query = "select stars_rated from rate_prod where prod_id = ?";
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, id);

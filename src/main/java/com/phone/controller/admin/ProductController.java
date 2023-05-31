@@ -75,11 +75,17 @@ public class ProductController {
     }
 
     @PostMapping("edit-product/product/{id}/edit")
-    public String updateProduct(@ModelAttribute("product") Product product,@RequestParam("file") MultipartFile file) {
-    	String nameFile = file.getOriginalFilename();		
-		saveImageInProject(file);
-		product.setImage(nameFile);
-        productDAO.updateProduct(product);
+    public String updateProduct(@ModelAttribute("product") Product product,@RequestParam("file") MultipartFile file) { 	
+    	String nameFile = file.getOriginalFilename();	
+    	if(!(nameFile.isEmpty())) {
+    		saveImageInProject(file);
+    		product.setImage(nameFile);
+    		
+    	}else
+    	{		
+    		product.setImage(product.getImage());  		
+    	}
+    	productDAO.updateProduct(product);       
         return "redirect:/productandcategory";
     }
 
