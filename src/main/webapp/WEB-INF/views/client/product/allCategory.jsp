@@ -27,7 +27,7 @@ a {
 				<div class="container">
 					<h6 class="mb-0">
 					<a style="color: white !important;"
-			href="${pageContext.request.contextPath}/category">Category</a> 
+			href="${pageContext.request.contextPath}/allCategory">Category</a> 
 					</h6>
 				</div>
 			</div>

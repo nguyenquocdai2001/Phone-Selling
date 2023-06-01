@@ -35,31 +35,31 @@
 						</tr>
 					</thead>
 					<tbody>
-
-						<form action="${pageContext.request.contextPath}/update"
-							method="post">
-							<c:forEach var="item" items="${CART_ITEMS}">
-								<input type="hidden" name="id" value="${item.productID}" />
-								<tr>
-									<td>${item.productID }</td>
-									<td>${item.name }</td>
-									<td><fmt:formatNumber value="${item.price}"
-											type="currency" currencyCode="VND" /></td>
-									<td><input name="qty" value="${item.qty}"
-										onblur="this.form.submit()" style="width: 50px;"></td>
-									
-									<td><fmt:formatNumber value="${item.price*item.qty}"
-											type="currency" currencyCode="VND" /></td>
-									<td><a class="btn btn-dark btn-sm"
-										href="${pageContext.request.contextPath}/delete/${item.productID }">Remove</a></td>
-								</tr>
-						</form>
+						<c:forEach var="item" items="${CART_ITEMS}">
+							<form action="${pageContext.request.contextPath}/update"
+								method="post">
+								
+									<input type="hidden" name="id" value="${item.productID}" />
+									<tr>
+										<td>${item.productID }</td>
+										<td>${item.name }</td>
+										<td><fmt:formatNumber value="${item.price}"
+												type="number" currencyCode="VND" /></td>
+										<td><input name="qty" value="${item.qty}"
+											onblur="this.form.submit()" style="width: 50px;"></td>
+										
+										<td><fmt:formatNumber value="${item.price*item.qty}"
+												type="number" currencyCode="VND" /></td>
+										<td><a class="btn btn-dark btn-sm"
+											href="${pageContext.request.contextPath}/delete/${item.productID }">Remove</a></td>
+									</tr>
+							</form>
 						</c:forEach>
 					</tbody>
 				</table>
 				<p class="text-danger font-weight-bold">Total Amount:
 				<fmt:formatNumber value="${TOTAL_PRICE}"
-											type="currency" currencyCode="VND" />
+											type="number" currencyCode="VND" />
 					</p>
 				<hr />
 				<a class="btn btn-dark btn-sm"

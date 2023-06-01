@@ -42,7 +42,7 @@ a {
 							</c:when>
 							<c:otherwise>
 								<a style="color: white !important;"
-									href="${pageContext.request.contextPath}/category">Category</a> / <a
+									href="${pageContext.request.contextPath}/allCategory">Category</a> / <a
 									style="color: white !important;"
 									href="${pageContext.request.contextPath}/allProduct">All
 									Product</a>
@@ -82,8 +82,8 @@ a {
 											</c:choose>
 												
 											</h5>
-										<span class="float-start"><fmt:formatNumber value="${product.selling_price}" type="currency" currencyCode="VND" /></span>
-										<span class="float-end"><s><fmt:formatNumber value="${product.og_price}" type="currency" currencyCode="VND" /></s></span>
+										<span class="float-start"><fmt:formatNumber value="${product.selling_price}" type="number" currencyCode="VND" /></span>
+										<span class="float-end"><s><fmt:formatNumber value="${product.og_price}" type="number" currencyCode="VND" /></s></span>
 										</div>
 									</div>
 								</a>

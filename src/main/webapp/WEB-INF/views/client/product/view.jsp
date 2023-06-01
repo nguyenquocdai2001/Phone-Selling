@@ -126,9 +126,9 @@ a {
 							</h1>
 							<hr>
 
-							<lable class="me-3"> Original Price : <s><fmt:formatNumber value="${product.og_price}" type="currency" currencyCode="VND" /></s></lable>
+							<lable class="me-3"> Original Price : <s><fmt:formatNumber value="${product.og_price}" type="number" currencyCode="VND" /></s></lable>
 										
-							<lable class="fw-bold">Selling Price : <fmt:formatNumber value="${product.selling_price}" type="currency" currencyCode="VND" /></lable>
+							<lable class="fw-bold">Selling Price : <fmt:formatNumber value="${product.selling_price}" type="number" currencyCode="VND" /></lable>
 
 							<div class="rating mt-2">
 								<%

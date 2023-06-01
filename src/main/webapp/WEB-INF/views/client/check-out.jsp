@@ -53,9 +53,12 @@
 					</div>
 
 					<div class="form-group">
-						<label class="text-dark">Total price</label> <input type="text"
+						<label class="text-dark">Total price</label> <input type="hidden"
 							class="form-control" name="totalPrice" id="totalPrice"
 							value="<c:out value="${TOTAL_PRICE}" />" readonly>
+							<p class="font-weight-bold form-control"> <fmt:formatNumber value="${TOTAL_PRICE}" 
+							type="number" currencyCode="VND"/>
+					</p>
 					</div>
 
 

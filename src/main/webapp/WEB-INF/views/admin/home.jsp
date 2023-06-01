@@ -10,7 +10,8 @@
 							<p class="card-category">List of client registered</p>
 						</div>
 						<div class="card-body table-full-width table-responsive">
-							<table id="users" class="table table-hover">
+
+							<table class="table table-hover" >
 								<thead>
 									<th>ID</th>
 									<th>Name</th>

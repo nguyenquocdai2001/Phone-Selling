@@ -93,9 +93,9 @@
 													<td>${product.description}</td>
 													<td>${product.status == '0' ? 'Stop' : 'Selling'}</td>
 													<td><fmt:formatNumber value="${product.og_price}"
-															type="currency" currencyCode="VND" /></td>
+															type="number" currencyCode="VND" /></td>
 													<td><fmt:formatNumber value="${product.selling_price}"
-															type="currency" currencyCode="VND" /></td>
+															type="number" currencyCode="VND" /></td>
 													<td>${product.quantity}</td>
 													<td>${product.trending == '0' ? 'No' : 'Trending'}</td>
 													<td><img class="img" height="60px" width="60px"

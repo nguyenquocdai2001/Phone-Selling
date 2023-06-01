@@ -110,7 +110,7 @@
 										<div class="row">
 											<div class="col-md-6 mb-3">
 												<div class="form-group">
-													<label>trending</label> <input type="number"
+													<label>Quantity</label> <input type="number"
 														name="quantity" class="form-control"
 														placeholder="Quantity" required min="0" />
 												</div>
