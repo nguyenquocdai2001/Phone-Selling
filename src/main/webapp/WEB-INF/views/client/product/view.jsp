@@ -126,11 +126,9 @@ a {
 							</h1>
 							<hr>
 
-							<lable class="me-3"> Original Price : <s>${product.og_price}$</s>
-							</lable>
-							<input type="hidden" name="price" value="${product.selling_price}">						
-							<lable  class="fw-bold">Selling Price :
-							${product.selling_price}$</lable>
+							<lable class="me-3"> Original Price : <s><fmt:formatNumber value="${product.og_price}" type="number" currencyCode="VND" /></s></lable>
+										
+							<lable class="fw-bold">Selling Price : <fmt:formatNumber value="${product.selling_price}" type="number" currencyCode="VND" /></lable>
 
 							<div class="rating mt-2">
 								<%
@@ -149,9 +147,9 @@ a {
 								%>
 								<span> <%
  if (rateNum > 0) {
- %> <%=rateNum%> Đánh giá <%
+ %> <%=rateNum%> Rating <%
  } else {
- %> Chưa có đánh giá <%
+ %> None rating <%
  }
  %>
 								</span>

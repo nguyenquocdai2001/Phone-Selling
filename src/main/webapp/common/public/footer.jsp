@@ -1,9 +1,9 @@
 <footer>
 		<div class="row foot">
 			<div class="col">
-				<h1>Downy Shoes</h1>
+				<h1>Phone Selling</h1>
 				<p>
-					Official <a href="https://www.nike.com/xf/en_gb/">Nike</a> Partner
+					Official <a href="https://www.nike.com/xf/en_gb/">Phone</a> Partner
 				</p>
 			</div>
 			<div class="col">
@@ -21,7 +21,7 @@
 			<div class="col">
 				<h2>
 					Copyright <sup>©</sup> <a href="https://www.codepen.io/jeetg57"
-						target="_blank">Jeet Gohil</a>
+						target="_blank">Phone Selling</a>
 				</h2>
 			</div>
 		</div>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,8 +82,8 @@ a {
 											</c:choose>
 												
 											</h5>
-											<span class="float-start">${product.selling_price}$</span> <span
-												class="float-end"><s>${product.og_price}$</s></span>
+										<span class="float-start"><fmt:formatNumber value="${product.selling_price}" type="number" currencyCode="VND" /></span>
+										<span class="float-end"><s><fmt:formatNumber value="${product.og_price}" type="number" currencyCode="VND" /></s></span>
 										</div>
 									</div>
 								</a>

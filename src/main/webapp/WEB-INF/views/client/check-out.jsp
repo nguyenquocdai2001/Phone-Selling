@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-		
+
 <title>Check Out</title>
 <%@ include file="/common/public/info/linkinfo.jsp"%>
 </head>
@@ -24,7 +25,8 @@
 				<header class="text-center py-3 rounded ">
 					<h1 class="display-5 font-weight-bold text-secondary text-center">Information</h1>
 				</header>
-				<form action="${pageContext.request.contextPath}/confirmCheckout" method="post">
+				<form action="${pageContext.request.contextPath}/confirmCheckout"
+					method="post">
 
 					<div class="form-group">
 						<label class="text-dark ">Email</label> <input type="text"
@@ -49,12 +51,16 @@
 							class="form-control" name="address" id="address"
 							value="<c:out value="${users.address}" />">
 					</div>
-					
+
 					<div class="form-group">
-						<label class="text-dark ">Total price</label> <input type="text"
+						<label class="text-dark">Total price</label> <input type="hidden"
 							class="form-control" name="totalPrice" id="totalPrice"
-							value=" <c:out value="${TOTAL_PRICE}" />" readonly>
+							value="<c:out value="${TOTAL_PRICE}" />" readonly>
+							<p class="font-weight-bold form-control"> <fmt:formatNumber value="${TOTAL_PRICE}" 
+							type="number" currencyCode="VND"/>
+					</p>
 					</div>
+
 
 
 					<c:if test='${not empty message}'>
@@ -70,7 +76,8 @@
 					<c:if test='${TOTAL_PRICE > 0}'>
 						<button class="btn btn-success" type="submit">Save</button>
 					</c:if>
-					<a class="btn btn-secondary" href="${pageContext.request.contextPath}/views">Back</a>
+					<a class="btn btn-secondary"
+						href="${pageContext.request.contextPath}/views">Back</a>
 				</form>
 			</div>
 
@@ -78,9 +85,9 @@
 	</div>
 </body>
 <c:if test="${not empty status}">
-        <script>
-            swal("${status}");
-        </script>
-    </c:if>
+	<script>
+		swal("${status}");
+	</script>
+</c:if>
 </html>
 

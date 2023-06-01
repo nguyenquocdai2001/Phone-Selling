@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
     <head>
         <meta charset="UTF-8" />
@@ -41,7 +42,8 @@
 	                        <td>${order.address}</td>
 	                        <td>${order.phone}</td>
 	                        <td>${order.status}</td>
-	                        <td>${order.totalPrice}</td>
+	                        <td><fmt:formatNumber value="${order.totalPrice}"
+											type="currency" currencyCode="VND" /></td>	                        
 	                        <td><a class="btn btn-secondary btn-sm" href="${pageContext.request.contextPath}/detailHistoryUser/${order.id}">Details</a> 
                     </tr>
                     
