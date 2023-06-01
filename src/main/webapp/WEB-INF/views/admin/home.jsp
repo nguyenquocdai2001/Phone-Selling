@@ -10,13 +10,11 @@
 							<p class="card-category">List of client registered</p>
 						</div>
 						<div class="card-body table-full-width table-responsive">
-							<table class="table table-hover">
+							<table id="users" class="table table-hover">
 								<thead>
 									<th>ID</th>
 									<th>Name</th>
 									<th>Email</th>
-									<!-- <th>Phone</th>
-									<th>Address</th> -->
 									<th>Role</th>
 									<th>State</th>
 									<th>Detail</th>
@@ -27,9 +25,7 @@
 											<c:if test="${user.role != 'admin'}">
 												<td>${user.id}</td>
 												<td>${user.name}</td>
-												<td>${user.email}</td>
-												<%-- <td>${user.phone}</td>
-												<td>${user.address}</td> --%>
+												<td>${user.email}</td>											
 												<td>${user.role}</td>
 												<td>${user.state}</td>
 												<td><a href="./detailUser/${user.id}">Detail</a>
