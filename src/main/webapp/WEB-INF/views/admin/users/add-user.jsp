@@ -42,7 +42,7 @@
 										<label class="text-dark ">Email</label> 
 										
 											<input type="text"
-												class="form-control <c:if test='${empty check.email}'> ${valid.isValid} </c:if>" name="email" placeholder="Enter Email"
+												class="form-control <c:if test='${empty check.email}'> ${valid} </c:if>" name="email" placeholder="Enter Email"
 												id="email" value="${check.email}" >
 										
 									</div>
@@ -50,7 +50,7 @@
 										<label class="text-dark ">Password</label>
 										
 										 <input
-											type="password" class="form-control <c:if test='${empty check.password}'> ${valid.isValid} </c:if>" name="password"
+											type="password" class="form-control <c:if test='${empty check.password}'> ${valid} </c:if>" name="password"
 											placeholder="Enter Password" value="${check.password}"  ">
 											
 									</div>
@@ -58,7 +58,7 @@
 										<label class="text-dark ">Confirm password</label> 
 										
 										<input
-											type="password" class="form-control <c:if test='${empty check.password}'> ${valid.isValid} </c:if>" name="confirmPassword"
+											type="password" class="form-control <c:if test='${empty check.password}'> ${valid} </c:if>" name="confirmPassword"
 											placeholder="Enter Confirm password" id="confirmPassword"
 											value="${check.password}" >
 											
@@ -70,7 +70,7 @@
 										<label class="text-dark ">Fullname</label> 
 										
 										<input type="text"
-											class="form-control <c:if test='${empty check.name}'> ${valid.isValid} </c:if>" name="name" placeholder="Enter Fullname"
+											class="form-control <c:if test='${empty check.name}'> ${valid} </c:if>" name="name" placeholder="Enter Fullname"
 											id="name" value="${check.name}" >
 											
 									</div>
@@ -79,7 +79,7 @@
 										<label class="text-dark ">Phone</label> 
 										
 										<input type="number"
-											class="form-control <c:if test='${empty check.phone}'> ${valid.isValid} </c:if>" name="phone" placeholder="Enter Phone"
+											class="form-control <c:if test='${empty check.phone}'> ${valid} </c:if>" name="phone" placeholder="Enter Phone"
 											id="phone" value="${check.phone}" >
 											
 									</div>
@@ -87,7 +87,7 @@
 										<label class="text-dark ">Address</label> 
 										
 										<input type="text"
-											class="form-control <c:if test='${empty check.address}'> ${valid.isValid} </c:if>" name="address"
+											class="form-control <c:if test='${empty check.address}'> ${valid} </c:if>" name="address"
 											placeholder="Enter Address" id="address" value="${check.address}" >
 											
 									</div>

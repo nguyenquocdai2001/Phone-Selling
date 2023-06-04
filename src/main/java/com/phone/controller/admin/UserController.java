@@ -47,7 +47,7 @@ public class UserController {
 	@GetMapping("/addUser")
 	public String showAddUserForm(Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("valid", new valid("no"));
+		//model.addAttribute("valid", new valid("no"));
 		return "./admin/users/add-user";
 	}
 
@@ -90,10 +90,10 @@ public class UserController {
 			User u = new User(name, email, encryptedpassword, phone, address);
 			userDAO.saveUser(u);
 			model.addAttribute("USER", u);
-			model.addAttribute("valid", new valid("yes"));
+			//model.addAttribute("valid", new valid("yes"));
 			return "./admin/users/add-user";
 		} else {
-			model.addAttribute("valid", new valid("is-invalid"));
+			model.addAttribute("valid", "is-invalid");
 			//luu value khi register failed
 			model.addAttribute("check", new User(name, email, password, phone, address));
 			System.out.println("Register that bai");
@@ -221,7 +221,7 @@ public class UserController {
 					model.addAttribute("users", users.get());
 				}
 				// session này dùng cho hiển thị fullname của người dùng ở header
-				session.setAttribute("helloUser", users.get().getName());
+				session.setAttribute("helloUser", users.get().getName().toUpperCase());
 
 				return "./admin/users/edit-profile";
 			} else {
@@ -278,7 +278,7 @@ public class UserController {
 						model.addAttribute("users", users.get());
 					}
 					// session này dùng cho hiển thị fullname của người dùng ở header
-					session.setAttribute("helloUser", users.get().getName());
+					session.setAttribute("helloUser", users.get().getName().toUpperCase());
 
 					return "./client/users/edit-profile";
 				} else {

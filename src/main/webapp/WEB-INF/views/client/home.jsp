@@ -88,8 +88,4 @@
 	
 		</div>
 	</section>
-
-	<h3 style="text-align: center">
-		<a href="./HTML/survey.html">Click here to take a quick survey</a>
-	</h3>
 </body>

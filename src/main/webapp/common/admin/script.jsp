@@ -33,8 +33,4 @@ $(document).ready(function () {
     $('#orders').DataTable();
 });
 
-$(document).ready(function () {
-    $('#users').DataTable();
-});
-
 </script>

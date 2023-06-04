@@ -39,9 +39,9 @@
 							<form action="${pageContext.request.contextPath}/update"
 								method="post">
 								
-									<input type="hidden" name="id" value="${item.productID}" />
+									<input type="hidden" name="id" value="${item.prod_id}" />
 									<tr>
-										<td>${item.productID }</td>
+										<td>${item.prod_id }</td>
 										<td>${item.name }</td>
 										<td><fmt:formatNumber value="${item.price}"
 												type="number" currencyCode="VND" /></td>
@@ -51,7 +51,7 @@
 										<td><fmt:formatNumber value="${item.price*item.qty}"
 												type="number" currencyCode="VND" /></td>
 										<td><a class="btn btn-dark btn-sm"
-											href="${pageContext.request.contextPath}/delete/${item.productID }">Remove</a></td>
+											href="${pageContext.request.contextPath}/delete/${item.prod_id }">Remove</a></td>
 									</tr>
 							</form>
 						</c:forEach>
