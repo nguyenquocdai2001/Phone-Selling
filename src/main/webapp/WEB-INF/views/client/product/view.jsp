@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
 double rate = (double) pageContext.findAttribute("rate");
@@ -22,9 +22,9 @@ int rateNum = (int) pageContext.findAttribute("rateNum");
 .checked {
 	color: #ffe400;
 }
+
 a {
 	text-decoration: none;
-	
 }
 </style>
 </head>
@@ -96,10 +96,13 @@ a {
 			</div>
 		</div>
 
-		<div class="container pb-5">	
+<form method="POST"  action="${pageContext.request.contextPath}/addtoCart"
+										enctype="multipart/form-data">																
+										<input type="hidden" name="user_id" value="${userSession.id}">
+		<div class="container pb-5">
 			<div class="card shadow">
 				<div class="card-body">
-					<div class="row">					
+					<div class="row">
 						<div class="col-md-3 border-right">
 							<img
 								src="${pageContext.request.contextPath}/template/admin/upload/
@@ -114,21 +117,26 @@ a {
 								alt="" class="w-100" />
 						</div>
 						<div class="col-md-7">
+						<input type="hidden" name="name" value="${product.name}">
+						<input type="hidden" name="prod_id" value="${product.id}">			
 							<h1 class="mb-0">${product.name}
-							<c:choose>
-								<c:when test="${product.status ==1 }">
-								<label style="font-size: 16px;"
-									class="float-end badge bg-danger">${product.trending == '1' ? 'Trending' : ''}</label>
-								</c:when>
-							
-							</c:choose>
-								
+								<c:choose>
+									<c:when test="${product.status ==1 }">
+										<label style="font-size: 16px;"
+											class="float-end badge bg-danger">${product.trending == '1' ? 'Trending' : ''}</label>
+									</c:when>
+
+								</c:choose>
+
 							</h1>
 							<hr>
 
-							<lable class="me-3"> Original Price : <s><fmt:formatNumber value="${product.og_price}" type="number" currencyCode="VND" /></s></lable>
-										
-							<lable class="fw-bold">Selling Price : <fmt:formatNumber value="${product.selling_price}" type="number" currencyCode="VND" /></lable>
+							<lable class="me-3"> Original Price : <s><fmt:formatNumber
+									value="${product.og_price}" type="number" currencyCode="VND" /></s></lable>
+							<input type="hidden" name="price" value="${product.selling_price}">
+							<lable class="fw-bold">Selling Price : <fmt:formatNumber
+								value="${product.selling_price}" type="number"
+								currencyCode="VND" /></lable>
 
 							<div class="rating mt-2">
 								<%
@@ -157,49 +165,51 @@ a {
 							<p class="mt-3">${product.description}</p>
 							<hr>
 							<c:choose>
-							<c:when test="${product.status ==1 }">
-							<c:choose>
-								<c:when test="${product.quantity > 0}">
-									<label class="badge bg-success">In stock</label>
-								</c:when>
-								<c:otherwise>
-									<label class="badge bg-danger">Run out</label>
-								</c:otherwise>
-							</c:choose>
-						
-							<label>Quantity</label>
-							<div class="row mt-2">
-								<div class="col-md-3">
-									<div class="input-group text-center mb-3">
-										<input class="input-group-text" type="button" value="-"
-											onclick="decreaseQuantity()" /> <input
-											class="form-control text-center" type="text" id="quantity" name="qty"
-											value="1"/> <input class="input-group-text" type="button"
-											value="+" onclick="increaseQuantity()" />
-									</div>
-								</div>
-								<div class="col-md-7">
+								<c:when test="${product.status ==1 }">
 									<c:choose>
 										<c:when test="${product.quantity > 0}">
-											<a class="btn btn-dark  me-3 float-start"
-												href="${pageContext.request.contextPath}/add/${product.id}">Add to cart<i
-												class="fa fa-shopping-cart"></i>
-											</a>&nbsp; &nbsp; 
-								</c:when>
+											<label class="badge bg-success">In stock</label>
+										</c:when>
+										<c:otherwise>
+											<label class="badge bg-danger">Run out</label>
+										</c:otherwise>
 									</c:choose>
-									<a class="btn btn-light me-3 float-start" href="">Add to
-										wishlist <i class="fa fa-heart"></i>
-									</a>
-								</div>
-							</div>
+									
+										<label>Quantity</label>
+										<div class="row mt-2">
+											<div class="col-md-3">
+												<div class="input-group text-center mb-3">
+													<input class="input-group-text" type="button" value="-"
+														onclick="decreaseQuantity()" /> <input
+														class="form-control text-center" type="text" id="quantity"
+														name="qty" value="1" /> <input class="input-group-text"
+														type="button" value="+" onclick="increaseQuantity()" />
+												</div>
+											</div>
+											<div class="col-md-7">
+												<c:choose>
+													<c:when test="${product.quantity > 0}">
+														<button class="btn btn-dark  me-3 float-start"
+															type="submit">
+															Add to cart<i class="fa fa-shopping-cart"></i>
+														</button>&nbsp; &nbsp; 
+								</c:when>
+												</c:choose>
+												<a class="btn btn-light me-3 float-start" href="">Add to
+													wishlist <i class="fa fa-heart"></i>
+												</a>
+											</div>
+										</div>
+									
 								</c:when>
 								<c:otherwise>
-							<label style="font-size: 24px;"
-									class="float-end badge bg-danger">Temporary business suspension</label>
-							</c:otherwise>
-								</c:choose>
+									<label style="font-size: 24px;"
+										class="float-end badge bg-danger">Temporary business
+										suspension</label>
+								</c:otherwise>
+							</c:choose>
 						</div>
-						
+
 						<div class="row">
 							<div class="col-md-4">
 								<c:choose>
@@ -215,7 +225,7 @@ a {
 							</div>
 							<div class="col-md-6">
 								<c:forEach var="review" items="${listReview}">
-							
+
 									<div class="user-review">
 										<label>${review.name}</label>
 										<c:choose>
@@ -233,10 +243,12 @@ a {
 											end="5">
 											<i class="fa fa-star"></i>
 										</c:forEach>
-										<fmt:parseDate  value="${review.created_at}" pattern="yyyy-MM-dd" type="date" var="myDate" />
-										<fmt:formatDate value="${myDate}" var="newParsedDate" type="date" pattern="dd/MMM/yyyy" />
-            							<small>Reviewed on ${newParsedDate}</small>
-            							<p>${review.user_review}</p>
+										<fmt:parseDate value="${review.created_at}"
+											pattern="yyyy-MM-dd" type="date" var="myDate" />
+										<fmt:formatDate value="${myDate}" var="newParsedDate"
+											type="date" pattern="dd/MMM/yyyy" />
+										<small>Reviewed on ${newParsedDate}</small>
+										<p>${review.user_review}</p>
 									</div>
 								</c:forEach>
 							</div>
@@ -244,14 +256,13 @@ a {
 					</div>
 				</div>
 			</div>
-			
 		</div>
-		
+</form>
 	</section>
-   <c:if test="${not empty status}">
-        <script>
-            swal("${status}");
-        </script>
-    </c:if>
+	<c:if test="${not empty status}">
+		<script>
+			swal("${status}");
+		</script>
+	</c:if>
 </body>
 </html>

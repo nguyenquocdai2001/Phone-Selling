@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -169,32 +170,38 @@ public class HomeController {
   	}
     
   //-----------------------------------------------------------Add cart---------------------------------------------------------	
-  	@GetMapping("add/{id}")
-  	public String addCart(@PathVariable("id") Integer id, Model model, HttpSession session) {
-  		
-  		if (session.getAttribute("userSession") != null) {
-	    	User loggedInUser = (User) session.getAttribute("userSession");
-			if (loggedInUser.getRole().equals("admin")) {
-				return "redirect:/home";
-			} else {
-				Product product = productDAO.getProductById(id);
-		  		int tmpID = id;
-		  		if(product != null) {
-		  			CartItem item = new CartItem();
-		  			item.setProductID(product.getId());
-		  			item.setName(product.getName());
-		  			item.setPrice(product.getSelling_price());
-		  			item.setUserID(loggedInUser.getId());
-		  			item.setQty(1);
-		  			cartItemDAO.add(item);		  			
-		  		}
-		  		return "redirect:/info/" + tmpID;
-			}
-    	}
-  		return "./client/users/login";
-  		
-  	}
-
+//  	@GetMapping("add/{id}")
+//  	public String addCart(@PathVariable("id") Integer id, Model model, HttpSession session) {
+//  		
+//  		if (session.getAttribute("userSession") != null) {
+//	    	User loggedInUser = (User) session.getAttribute("userSession");
+//			if (loggedInUser.getRole().equals("admin")) {
+//				return "redirect:/home";
+//			} else {
+//				Product product = productDAO.getProductById(id);
+//		  		int tmpID = id;
+//		  		if(product != null) {
+//		  			CartItem item = new CartItem();
+//		  			item.setProd_id(product.getId());
+//		  			item.setName(product.getName());
+//		  			item.setPrice(product.getSelling_price());
+//		  			item.setUser_id(loggedInUser.getId());
+//		  			item.setQty(1);
+//		  			cartItemDAO.add(item);		  			
+//		  		}
+//		  		return "redirect:/info/" + tmpID;
+//			}
+//    	}
+//  		return "./client/users/login";
+//  		
+//  	}
+    @PostMapping("/addtoCart")
+    public String addtoCart(@ModelAttribute("cart_items") CartItem cartItem,RedirectAttributes redirectAttributes) {
+    	int prod_id = cartItem.getProd_id();
+    	cartItemDAO.add(cartItem);		     
+    	redirectAttributes.addFlashAttribute("status", "Add to cart successfully");
+        return "redirect:/info/" + prod_id;
+    }
   //-----------------------------------------------------------Clear cart---------------------------------------------------------
   	@GetMapping("clear")
   	public String clearCart(HttpSession session) {
@@ -301,19 +308,19 @@ public class HomeController {
   	    				
   	    				for (CartItem item:cartItemDAO.getAllItemsByUserID(loggedInUser.getId())) {
   	    					OrderItem orderItem = new OrderItem();
-  	    					orderItem.setProductID(item.getProductID());    
+  	    					orderItem.setProductID(item.getProd_id());    
   	    					orderItem.setOrderID(id);
   	    					orderItem.setPrice(item.getPrice());
   	    					orderItem.setOrderItemQty(item.getQty());
   	    					orderItemDAO.saveOrderItem(orderItem);
   	    					
   	    					//số lượng product trước khi bán
-  	    					int qtyProd = productDAO.getProductById(item.getProductID()).getQuantity();
+  	    					int qtyProd = productDAO.getProductById(item.getProd_id()).getQuantity();
   	    					
   	    					//cập nhật lại số lượng product sau khi bán
   	    					Product prod = new Product();
   	    					prod.setQuantity(qtyProd - item.getQty());
-  	    					prod.setId(item.getProductID());
+  	    					prod.setId(item.getProd_id());
   	    					productDAO.updateProductAfterSelling(prod);
   	    				}
   	    				//clear cart khi đã check out xong

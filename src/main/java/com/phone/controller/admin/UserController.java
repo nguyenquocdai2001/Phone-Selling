@@ -127,7 +127,7 @@ public class UserController {
 			session.setAttribute("USERNAME", email);
 			
 			// session này dùng cho hiển thị fullname của người dùng ở header
-			session.setAttribute("helloUser", existingUser.getName());
+			session.setAttribute("helloUser", existingUser.getName().toUpperCase());
 			
 			// session này dùng cho hiển thị các chức năng của người dùng admin hoặc client ở sidebars
 			session.setAttribute("userRole", existingUser.getRole());
@@ -215,7 +215,7 @@ public class UserController {
 					model.addAttribute("users", users.get());
 				}
 				// session này dùng cho hiển thị fullname của người dùng ở header
-				session.setAttribute("helloUser", users.get().getName());
+				session.setAttribute("helloUser", users.get().getName().toUpperCase());
 
 				return "./admin/users/edit-profile";
 			} else {
@@ -272,7 +272,7 @@ public class UserController {
 						model.addAttribute("users", users.get());
 					}
 					// session này dùng cho hiển thị fullname của người dùng ở header
-					session.setAttribute("helloUser", users.get().getName());
+					session.setAttribute("helloUser", users.get().getName().toUpperCase());
 
 					return "./client/users/edit-profile";
 				} else {

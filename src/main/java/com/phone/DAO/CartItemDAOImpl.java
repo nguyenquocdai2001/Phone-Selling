@@ -27,17 +27,17 @@ public class CartItemDAOImpl implements CartItemDAO{
 	
 	@Override
 	public void add(CartItem item) {
-		CartItem cartItem = maps.get(item.getProductID());
-		if(checkItemIsAdded(item.getUserID(), item.getProductID()) == false) { //product chưa đc add vào giỏ hàng
-			maps.put(item.getProductID(), item);
+		CartItem cartItem = maps.get(item.getProd_id());
+		if(checkItemIsAdded(item.getUser_id(), item.getProd_id()) == false) { //product chưa đc add vào giỏ hàng
+			maps.put(item.getProd_id(), item);
 			//sau khi thêm item vào giỏ hàng thì insert item đó vào database luôn
 			save(item);
 		}
 		else {//trả về true là product đã đc add vào giỏ hàng trước đó 
 			//cartItem.setQty(cartItem.getQty() + 1);
-			updateQty(item.getProductID(), 
-					getQtyItemByProdIDAndUserID(item.getProductID(), item.getUserID()) + 1, 
-					item.getUserID());
+			updateQty(item.getProd_id(), 
+					getQtyItemByProdIDAndUserID(item.getProd_id(), item.getUser_id()) + 1, 
+					item.getUser_id());
 		}
 		
 	}
@@ -97,8 +97,8 @@ public class CartItemDAOImpl implements CartItemDAO{
             while (resultSet.next()) {
             	CartItem item = new CartItem();
             	item.setId(resultSet.getInt("id"));
-            	item.setUserID(resultSet.getInt("user_id"));
-            	item.setProductID(resultSet.getInt("prod_id"));
+            	item.setUser_id(resultSet.getInt("user_id"));
+            	item.setProd_id(resultSet.getInt("prod_id"));
             	item.setName(resultSet.getString("name"));
             	item.setQty(resultSet.getInt("qty"));
             	item.setPrice(resultSet.getDouble("price"));
@@ -142,8 +142,8 @@ public class CartItemDAOImpl implements CartItemDAO{
 		try (Connection connection = dataSource.getConnection();
 	             PreparedStatement statement = connection.prepareStatement("INSERT INTO cart_items (user_id, prod_id, name, qty, price)"
 	             		+ "VALUES (?, ?, ?, ?, ?)")) {
-	            statement.setInt(1, item.getUserID());
-	            statement.setInt(2, item.getProductID());
+	            statement.setInt(1, item.getUser_id());
+	            statement.setInt(2, item.getProd_id());
 	            statement.setString(3, item.getName());
 	            statement.setInt(4, item.getQty());
 	            statement.setDouble(5, item.getPrice());
