@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 
 import com.phone.model.User;
 import com.phone.validator.Message;
+import com.phone.validator.valid;
 
 public class UserDAOImpl implements UserDAO{
 	
@@ -158,33 +159,48 @@ public class UserDAOImpl implements UserDAO{
 		
 		if(email.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter email"));
+			
 		}
 		else if(password.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter password"));
+			
+		}
+		else if(password.length() < 1 && email.length() < 1 && confirmPassword.length() < 1 && name.length() < 1 
+				&& address.length() < 1 && address.length() < 1) {
+			model.addAttribute("message", new Message("warning", "Please enter password"));
+			
 		}
 		else if(password.length() < 6) {
 			model.addAttribute("message", new Message("warning", "Please enter password at least 6 digits"));
+			
 		}
 		else if(!(password.equals(confirmPassword))) {
 			model.addAttribute("message", new Message("warning", "Password is different from Confirm Password"));
+			
 		}
 		else if(confirmPassword.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter confirm password"));
+			
 		}
 		else if(name.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter fullname"));
+			
 		}
 		else if(phone.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter phone number"));
+			
 		}
 		else if(phone.length() != 10) {
 			model.addAttribute("message", new Message("warning", "Wrong type of phone number"));
+			
 		}
 		else if(address.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter address"));
+			
 		}
 		else if(optionalUser.isPresent()) {
 			model.addAttribute("message", new Message("warning", "Email is existed"));
+			
 		}
 		else {
 			model.addAttribute("message", new Message("success", "Register successfully"));

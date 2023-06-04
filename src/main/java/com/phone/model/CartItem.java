@@ -19,16 +19,16 @@ public class CartItem {
 		this.price = price;
 	}
 	
+	public CartItem() {
+		super();
+	}
+	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public CartItem() {
-		super();
 	}
 	
 	public Integer getId() {

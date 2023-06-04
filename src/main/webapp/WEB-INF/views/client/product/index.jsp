@@ -42,7 +42,7 @@ a {
 							</c:when>
 							<c:otherwise>
 								<a style="color: white !important;"
-									href="${pageContext.request.contextPath}/category">Category</a> / <a
+									href="${pageContext.request.contextPath}/allCategory">Category</a> / <a
 									style="color: white !important;"
 									href="${pageContext.request.contextPath}/allProduct">All
 									Product</a>

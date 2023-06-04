@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.phone.DAO.CartItemDAO;
 import com.phone.DAO.UserDAO;
 import com.phone.model.User;
+import com.phone.validator.valid;
 
 @Controller
 public class UserController {
@@ -46,6 +47,7 @@ public class UserController {
 	@GetMapping("/addUser")
 	public String showAddUserForm(Model model) {
 		model.addAttribute("user", new User());
+		model.addAttribute("valid", new valid("no"));
 		return "./admin/users/add-user";
 	}
 
@@ -88,8 +90,12 @@ public class UserController {
 			User u = new User(name, email, encryptedpassword, phone, address);
 			userDAO.saveUser(u);
 			model.addAttribute("USER", u);
+			model.addAttribute("valid", new valid("yes"));
 			return "./admin/users/add-user";
 		} else {
+			model.addAttribute("valid", new valid("is-invalid"));
+			//luu value khi register failed
+			model.addAttribute("check", new User(name, email, password, phone, address));
 			System.out.println("Register that bai");
 		}
 		return "./admin/users/add-user";
@@ -127,7 +133,7 @@ public class UserController {
 			session.setAttribute("USERNAME", email);
 			
 			// session này dùng cho hiển thị fullname của người dùng ở header
-			session.setAttribute("helloUser", existingUser.getName());
+			session.setAttribute("helloUser", existingUser.getName().toUpperCase());
 			
 			// session này dùng cho hiển thị các chức năng của người dùng admin hoặc client ở sidebars
 			session.setAttribute("userRole", existingUser.getRole());
