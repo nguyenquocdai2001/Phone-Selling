@@ -10,6 +10,8 @@ public class User {
 	private String address;
 	private String role;
 	private String state;
+	private String gender;
+	private String titlesOfAddress;
 	private String created_at;
 	private String updated_at;
 	
@@ -17,7 +19,7 @@ public class User {
 		super();
 	}
 	
-	public User(String name, String email, String password, String phone, String address, String role,
+	public User(String name, String email, String password, String phone, String address, String role, String gender,
 			String state, String created_at, String updated_at) {
 		super();
 		this.name = name;
@@ -27,12 +29,13 @@ public class User {
 		this.address = address;
 		this.role = role;
 		this.state = state;
+		this.gender = gender;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
 	}
 	
-	public User(String name, String email, String password, String phone, String address, String role,
-			String state) {
+	public User(String name, String email, String password, String phone, String address, String role, String gender,
+			String state, String titlesOfAddress) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -41,23 +44,28 @@ public class User {
 		this.address = address;
 		this.role = role;
 		this.state = state;
+		this.gender = gender;
+		this.titlesOfAddress = titlesOfAddress;
 	}
 	
-	public User(String name, String email, String password, String phone, String address) {
+	public User(String name, String email, String password, String phone, String address, String gender, String titlesOfAddress) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.phone = phone;
 		this.address = address;
+		this.gender = gender;
+		this.titlesOfAddress = titlesOfAddress;
 	}
 	
-	public User(String name, String email, String phone, String address) {
+	public User(String name, String email, String phone, String address, String titlesOfAddress) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.address = address;
+		this.titlesOfAddress = titlesOfAddress;
 	}
 	
 	//Getter and Setter
@@ -126,6 +134,22 @@ public class User {
 	}
 	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getTitlesOfAddress() {
+		return titlesOfAddress;
+	}
+
+	public void setTitlesOfAddress(String titlesOfAddress) {
+		this.titlesOfAddress = titlesOfAddress;
 	}
 	
 	

@@ -152,7 +152,7 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public boolean checkRegister(String name, String email, String password, String confirmPassword, String phone,
-			String address, Model model) {
+			String address, String gender, String titlesOfAddress, Model model) {
 		
 		Optional<User> optionalUser = getUserByEmail(email);
 		
@@ -197,6 +197,19 @@ public class UserDAOImpl implements UserDAO{
 		else if(address.length() < 1) {
 			model.addAttribute("message", new Message("warning", "Please enter address"));
 			
+		}
+		else if(!gender.equals("Male") && !gender.equals("Female")) {
+			model.addAttribute("message", new Message("warning", "Please choose gender"));
+		}
+		else if((gender.equals("Female") && titlesOfAddress.equals("Sir")) || 
+				(gender.equals("Female") && titlesOfAddress.equals("Mr"))) {
+			model.addAttribute("message", new Message("warning", "Female must be called Mrs, Miss, Madam or Lady, please choose again"));
+		}
+		else if((gender.equals("Male") && titlesOfAddress.equals("Mrs")) || 
+				(gender.equals("Male") && titlesOfAddress.equals("Miss")) ||
+				(gender.equals("Male") && titlesOfAddress.equals("Madam")) ||
+				(gender.equals("Male") && titlesOfAddress.equals("Lady"))) {
+			model.addAttribute("message", new Message("warning", "Male must be called Mr or Sir, please choose again"));
 		}
 		else if(optionalUser.isPresent()) {
 			model.addAttribute("message", new Message("warning", "Email is existed"));

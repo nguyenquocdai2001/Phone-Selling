@@ -20,8 +20,8 @@ public interface UserDAO {
     
     Optional<User> getUserByEmail(String email);
     
-    boolean checkRegister(String name, String email, String password, String confirmPassword, String phone, String address
-    		, Model model);
+    boolean checkRegister(String name, String email, String password, String confirmPassword, String phone, String address, 
+    		String gender, String titlesOfAddress, Model model);
     
     boolean checkLogin(String email, String password, Model model);
     
