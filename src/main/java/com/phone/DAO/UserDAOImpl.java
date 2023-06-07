@@ -31,8 +31,8 @@ public class UserDAOImpl implements UserDAO{
 	public void saveUser(User user) {
 		try (Connection connection = dataSource.getConnection();
 	             PreparedStatement statement = connection.prepareStatement("INSERT INTO users (name, email, password, phone, address,"
-	             		+ "role, state) "
-	             		+ "VALUES (?, ?, ?, ?, ?, ?, ?)")) {
+	             		+ "role, state, gender, titles_of_address) "
+	             		+ "VALUES (?, ?, ?, ?, ?, ?, ?,?,?)")) {
 	            statement.setString(1, user.getName());
 	            statement.setString(2, user.getEmail());
 	            statement.setString(3, user.getPassword());
@@ -40,6 +40,8 @@ public class UserDAOImpl implements UserDAO{
 	            statement.setString(5, user.getAddress());
 	            statement.setString(6, "client");
 	            statement.setString(7, "actived");
+	            statement.setString(8, user.getGender());
+	            statement.setString(9, user.getTitlesOfAddress());
 	            statement.executeUpdate();
 	            System.out.println("Register thanh cong");
 	        } catch (SQLException e) {
