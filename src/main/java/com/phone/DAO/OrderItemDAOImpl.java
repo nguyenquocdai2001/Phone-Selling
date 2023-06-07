@@ -99,4 +99,31 @@ public class OrderItemDAOImpl implements OrderItemDAO{
 		return orderItem;
 	}
 
+	@Override
+	public List<OrderItem> getIncome() {
+		List<OrderItem> orderItemList = new ArrayList<>();
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+            		 "SELECT FORMAT(CONVERT(DATE, o.created_at, 103), 'dd/MM/yyyy') "
+             		+ "AS created_at, SUM(o.price * o.qty) as price  "
+             		+ "FROM order_details o "
+             		+ "INNER JOIN orders e ON e.id = o.order_id "
+             		+ "WHERE e.status = 1 "
+             		+ "GROUP BY FORMAT(CONVERT(DATE, o.created_at, 103), 'dd/MM/yyyy'); ")) {                
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+            	OrderItem orderItem = new OrderItem();       
+            	orderItem.setPrice(resultSet.getDouble("price"));
+            	orderItem.setCreated_at(resultSet.getString("created_at"));
+        
+            	orderItemList.add(orderItem);         
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orderItemList;
+	}
+
+
+
 }

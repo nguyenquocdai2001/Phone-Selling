@@ -17,7 +17,7 @@ import com.phone.model.Category;
 public class CateDAOImpl implements CateDAO {
 
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
- DataSource dataSource = (DataSource) context.getBean("myDataSource");
+	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
 	@Override
 	public void addCategory(Category category) {

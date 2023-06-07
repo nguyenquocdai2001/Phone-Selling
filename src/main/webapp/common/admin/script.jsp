@@ -20,17 +20,27 @@
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script
 	src="<c:url value='/template/admin/js/light-bootstrap-dashboard.js?v=2.0.0'/>"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
-<script type="text/javascript">
-$(document).ready(function () {
-    $('#product').DataTable();
-});
-$(document).ready(function () {
-    $('#category').DataTable();
-});
-$(document).ready(function () {
-    $('#orders').DataTable();
-});
 
+<!-- Include Moment.js -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+
+<!-- Include DateTime plugin for DataTables -->
+<script
+	src="https://cdn.datatables.net/datetime/1.4.1/js/dataTables.dateTime.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#product').DataTable();
+	});
+	$(document).ready(function() {
+		$('#category').DataTable();
+	});
+	$(document).ready(function() {
+		$('#orders').DataTable();
+	});
 </script>
+

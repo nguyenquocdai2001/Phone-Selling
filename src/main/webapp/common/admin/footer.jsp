@@ -28,7 +28,7 @@
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>
-                            <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                            <a href="#">Phone Selling</a>, made with love for a better web
                         </p>
                     </nav>
                 </div>

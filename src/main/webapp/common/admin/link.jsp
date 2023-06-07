@@ -19,3 +19,5 @@
 <link
 	href="<c:url value='/template/admin/css/light-bootstrap-dashboard.css?v=2.0.0 '/>"
 	rel="stylesheet">
+<!-- Include DateTime plugin CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.4.1/css/dataTables.dateTime.min.css">

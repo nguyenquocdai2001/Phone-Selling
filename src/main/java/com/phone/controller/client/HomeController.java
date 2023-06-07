@@ -378,7 +378,8 @@ public class HomeController {
   	  		    	User loggedInUser = (User) session.getAttribute("userSession");
   	  				if (loggedInUser.getRole().equals("admin")) {
   	  					
-	  	  				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrder());
+	  	  				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrder()) 
+	  	  						.addAttribute("Income",orderItemDAO.getIncome());
 	  	  				
   	  					return "./admin/history/history";
   	  				} else {  			

@@ -39,39 +39,57 @@
 							<div class="row register-form">
 								<div class="col-md-5">
 									<div class="form-group">
-										<label class="text-dark ">Email</label> <input type="text"
-											class="form-control" name="email" placeholder="Enter Email"
-											id="email" value="">
+										<label class="text-dark ">Email</label> 
+										
+											<input type="text"
+												class="form-control <c:if test='${empty check.email}'> ${valid} </c:if>" name="email" placeholder="Enter Email"
+												id="email" value="${check.email}" >
+										
 									</div>
 									<div class="form-group">
-										<label class="text-dark ">Password</label> <input
-											type="password" class="form-control" name="password"
-											placeholder="Enter Password">
+										<label class="text-dark ">Password</label>
+										
+										 <input
+											type="password" class="form-control <c:if test='${empty check.password}'> ${valid} </c:if>" name="password"
+											placeholder="Enter Password" value="${check.password}"  ">
+											
 									</div>
 									<div class="form-group">
-										<label class="text-dark ">Confirm password</label> <input
-											type="password" class="form-control" name="confirmPassword"
+										<label class="text-dark ">Confirm password</label> 
+										
+										<input
+											type="password" class="form-control <c:if test='${empty check.password}'> ${valid} </c:if>" name="confirmPassword"
 											placeholder="Enter Confirm password" id="confirmPassword"
-											value="">
+											value="${check.password}" >
+											
 									</div>
 								</div>
 
 								<div class="col-md-5">
 									<div class="form-group">
-										<label class="text-dark ">Fullname</label> <input type="text"
-											class="form-control" name="name" placeholder="Enter Fullname"
-											id="name" value="">
+										<label class="text-dark ">Fullname</label> 
+										
+										<input type="text"
+											class="form-control <c:if test='${empty check.name}'> ${valid} </c:if>" name="name" placeholder="Enter Fullname"
+											id="name" value="${check.name}" >
+											
 									</div>
 
 									<div class="form-group">
-										<label class="text-dark ">Phone</label> <input type="number"
-											class="form-control" name="phone" placeholder="Enter Phone"
-											id="phone" value="">
+										<label class="text-dark ">Phone</label> 
+										
+										<input type="number"
+											class="form-control <c:if test='${empty check.phone}'> ${valid} </c:if>" name="phone" placeholder="Enter Phone"
+											id="phone" value="${check.phone}" >
+											
 									</div>
 									<div class="form-group">
-										<label class="text-dark ">Address</label> <input type="text"
-											class="form-control" name="address"
-											placeholder="Enter Address" id="address" value="">
+										<label class="text-dark ">Address</label> 
+										
+										<input type="text"
+											class="form-control <c:if test='${empty check.address}'> ${valid} </c:if>" name="address"
+											placeholder="Enter Address" id="address" value="${check.address}" >
+											
 									</div>
 								</div>
 

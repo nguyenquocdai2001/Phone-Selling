@@ -8,4 +8,5 @@ public interface OrderItemDAO {
 	void saveOrderItem(OrderItem orderItem);	
 	List<OrderItem> getAllOrderItemByOrderID(String orderID);
 	OrderItem checkOrder(int user_id, int prod_id);
+	List<OrderItem> getIncome();
 }

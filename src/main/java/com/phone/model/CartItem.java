@@ -7,6 +7,7 @@ public class CartItem {
 	private int qty ;
 	private String name;
 	private double price;
+	
 	public CartItem() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -20,6 +21,7 @@ public class CartItem {
 		this.name = name;
 		this.price = price;
 	}
+
 	public Integer getId() {
 		return id;
 	}

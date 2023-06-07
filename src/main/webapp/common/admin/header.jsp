@@ -16,19 +16,6 @@
 					data-toggle="dropdown"> <i class="nc-icon nc-palette"></i> <span
 						class="d-lg-none">Dashboard</span>
 				</a></li>
-				<li class="dropdown nav-item"><a href="#"
-					class="dropdown-toggle nav-link" data-toggle="dropdown"> <i
-						class="nc-icon nc-planet"></i> <span class="notification">5</span>
-						<span class="d-lg-none">Notification</span>
-				</a>
-					<ul class="dropdown-menu">
-						<a class="dropdown-item" href="#">Notification 1</a>
-						<a class="dropdown-item" href="#">Notification 2</a>
-						<a class="dropdown-item" href="#">Notification 3</a>
-						<a class="dropdown-item" href="#">Notification 4</a>
-						<a class="dropdown-item" href="#">Another notification</a>
-					</ul>
-					</li>	
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<c:set var="userSession" value="${userSession}" />
