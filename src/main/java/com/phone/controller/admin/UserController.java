@@ -57,7 +57,9 @@ public class UserController {
 			@RequestParam(required = false, name = "confirmPassword") String confirmPassword,
 			@RequestParam(required = false, name = "email") String email,
 			@RequestParam(required = false, name = "phone") String phone,
-			@RequestParam(required = false, name = "address") String address, Model model) {
+			@RequestParam(required = false, name = "address") String address,
+			@RequestParam(required = false, name = "gender") String gender,
+			@RequestParam(required = false, name = "titlesOfAddress") String titlesOfAddress, Model model) {
 
 		String encryptedpassword = null;
 		try {
@@ -85,9 +87,9 @@ public class UserController {
 			e.printStackTrace();
 		}
 
-		if (userDAO.checkRegister(name, email, password, confirmPassword, phone, address, model)) {
+		if (userDAO.checkRegister(name, email, password, confirmPassword, phone, address, gender, titlesOfAddress, model)) {
 			System.out.println("Register thanh cong");
-			User u = new User(name, email, encryptedpassword, phone, address);
+			User u = new User(name, email, encryptedpassword, phone, address, gender, titlesOfAddress);
 			userDAO.saveUser(u);
 			model.addAttribute("USER", u);
 			//model.addAttribute("valid", new valid("yes"));
@@ -95,7 +97,7 @@ public class UserController {
 		} else {
 			model.addAttribute("valid", "is-invalid");
 			//luu value khi register failed
-			model.addAttribute("check", new User(name, email, password, phone, address));
+			model.addAttribute("check", new User(name, email, password, phone, address, gender, titlesOfAddress));
 			System.out.println("Register that bai");
 		}
 		return "./admin/users/add-user";
