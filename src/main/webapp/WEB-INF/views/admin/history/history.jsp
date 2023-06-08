@@ -84,35 +84,40 @@
 									<h4 class="card-title">Monthly Income</h4>
 									<p class="card-category">List of monthly income</p>
 								</div>
-								<div class="card-body table-full-width table-responsive">							
-									<table
-										class="table table-striped table-borderless table-hover "
-										id="Income">
-										<thead>
-											<tr class="text-dark">
-												
-												<th class="text-center text-dark">Date time</th>											
-												<th class="text-center text-dark">Total income</th>
+								<form id="searchForm" action="${pageContext.request.contextPath}/searchIncome"
+									method="POST">
+									<div class="card-body table-full-width table-responsive">
+									<input type="date" name="startdate">
+									<input type="date" name="enddate">
+									<button class="rounded" type="submit" onclick="searchIncome()"><i class="fa fa-search"></i>Search</button>
+										<table
+											class="table table-striped table-borderless table-hover "
+											id="Income">
+											<thead>
+												<tr class="text-dark">
+													<th class="text-center text-dark">Date time</th>
+													<th class="text-center text-dark">Total income</th>
 
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="order" items="${Income}" varStatus="loop">
-												<tr>																				
-													<td>${order.created_at}</td>																								
-													<td><fmt:formatNumber value="${order.price}"
-															type="number" /></td>
 												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
+											</thead>
+											<tbody>
+												<c:forEach var="order" items="${Income}" varStatus="loop">
+													<tr>
+														<td>${order.created_at}</td>
+														<td><fmt:formatNumber value="${order.price}"
+																type="number" /></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 					<div>
-  <canvas id="myChart"></canvas>
-</div>
+						<canvas id="myChart"> </canvas>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -122,6 +127,7 @@
 </body>
 
 <%@ include file="/common/admin/script.jsp"%>
+
 <c:if test="${not empty status}">
 	<script>
 		swal("${status}");
@@ -152,6 +158,6 @@
         }
       }
     });
+    
   </script>
-
 </html>

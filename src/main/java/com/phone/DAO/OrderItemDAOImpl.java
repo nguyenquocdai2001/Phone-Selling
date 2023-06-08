@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -124,6 +125,59 @@ public class OrderItemDAOImpl implements OrderItemDAO{
         return orderItemList;
 	}
 
-
-
+	@Override
+	public List<OrderItem> getIncomeByDate(String startdate, String enddate) {
+		List<OrderItem> orderItemList = new ArrayList<>();
+		if(startdate == null && enddate == null ) {
+			 try (Connection connection = dataSource.getConnection();
+		             PreparedStatement statement = connection.prepareStatement(
+		            		 "SELECT FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd') "
+		            				 + "AS created_at, SUM(o.price * o.qty) as price "
+		            				 + "FROM order_details o "
+		            				 + "INNER JOIN orders e ON e.id = o.order_id "
+		            				 + "WHERE e.status = 1 and FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd') <= '"+ java.time.LocalDate.now() + "' "
+		            			 + "GROUP BY FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd');")) {  			
+		            ResultSet resultSet = statement.executeQuery();
+		            while (resultSet.next()) {
+		            	OrderItem orderItem = new OrderItem();       
+		            	orderItem.setPrice(resultSet.getDouble("price"));
+		            	orderItem.setCreated_at(resultSet.getString("created_at"));	        
+		            	orderItemList.add(orderItem);         
+		            }
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		        return orderItemList;
+		}
+		else 
+		{
+			return getIncomeWithDate(startdate, enddate);
+		}	     
+	}
+	public List<OrderItem> getIncomeWithDate(String startdate, String enddate){
+		List<OrderItem> orderItemList = new ArrayList<>();		
+			 try (Connection connection = dataSource.getConnection();
+		             PreparedStatement statement = connection.prepareStatement(
+		            		 "SELECT FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd') "
+		            				 + "AS created_at, SUM(o.price * o.qty) as price "
+		            				 + "FROM order_details o "
+		            				 + "INNER JOIN orders e ON e.id = o.order_id "
+		            				 + "WHERE e.status = 1 and FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd') <= '"+ java.time.LocalDate.now() + "' "
+		            				 + "and FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd') >= ? "
+		            				 + "and FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd') <= ? "
+		            				 + "GROUP BY FORMAT(CONVERT(DATE, o.created_at, 103), 'yyyy-MM-dd');")) {  
+				 statement.setString(1,startdate);
+				 statement.setString(2,enddate);
+		            ResultSet resultSet = statement.executeQuery();
+		            while (resultSet.next()) {
+		            	OrderItem orderItem = new OrderItem();       
+		            	orderItem.setPrice(resultSet.getDouble("price"));
+		            	orderItem.setCreated_at(resultSet.getString("created_at"));	        
+		            	orderItemList.add(orderItem);         
+		            }
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		        return orderItemList;
+	}
 }

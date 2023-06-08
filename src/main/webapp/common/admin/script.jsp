@@ -32,6 +32,7 @@
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#product').DataTable();

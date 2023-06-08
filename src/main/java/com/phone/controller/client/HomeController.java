@@ -49,12 +49,10 @@ public class HomeController {
 	OrderDAO orderDAO = (OrderDAO) context.getBean("OrderDAOImpl");
 	OrderItemDAO orderItemDAO = (OrderItemDAO) context.getBean("OrderItemDAOImpl");
 	UserDAO userDAO = (UserDAO) context.getBean("UserDAOImpl");
-    
-    
 
 	@RequestMapping(value = "/clienthome", method = RequestMethod.GET)
 	public ModelAndView homePage(ModelMap modelmap, HttpSession session) {
-		
+
 		if (session.getAttribute("userSession") != null) {
 			User loggedInUser = (User) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
@@ -62,7 +60,7 @@ public class HomeController {
 				return mav;
 			} else {
 				ModelAndView mav = new ModelAndView("client/home");
-				List<Product> listProduct = new ArrayList<>(); 
+				List<Product> listProduct = new ArrayList<>();
 				List<Category> listCate = new ArrayList<>();
 				listCate = cateDAO.getLimitCategory();
 				listProduct = productDAO.getTrendingProduct();
@@ -72,7 +70,7 @@ public class HomeController {
 			}
 		}
 		ModelAndView mav = new ModelAndView("client/home");
-		List<Product> listProduct = new ArrayList<>(); 
+		List<Product> listProduct = new ArrayList<>();
 		List<Category> listCate = new ArrayList<>();
 		listCate = cateDAO.getLimitCategory();
 		listProduct = productDAO.getTrendingProduct();
@@ -80,8 +78,6 @@ public class HomeController {
 		modelmap.addAttribute("listCate", listCate);
 		return mav;
 	}
-
-	
 
 	/*
 	 * @GetMapping("info/{id}") public String
@@ -94,48 +90,47 @@ public class HomeController {
 	 * Product product = productDAO.getProductById(id);
 	 * modelMap.addAttribute("product", product); return "client/product/view"; }
 	 */
-    
 
 	@RequestMapping(value = "/allProduct", method = RequestMethod.GET)
 	public ModelAndView productPage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/index");
-		List<Product> listProduct = new ArrayList<>(); 
+		List<Product> listProduct = new ArrayList<>();
 		listProduct = productDAO.getAllProductsClient();
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
-    
 
 	@RequestMapping(value = "/allCategory", method = RequestMethod.GET)
 	public ModelAndView categoryPage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/allCategory");
-		List<Category> listCate = new ArrayList<>(); 
+		List<Category> listCate = new ArrayList<>();
 		listCate = cateDAO.getAllCategory();
 		modelmap.addAttribute("listCate", listCate);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/phone", method = RequestMethod.GET)
 	public ModelAndView phonePage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/index");
-		List<Product> listProduct = new ArrayList<>(); 
+		List<Product> listProduct = new ArrayList<>();
 		listProduct = productDAO.getPhone();
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
+
 	@RequestMapping(value = "/accessories", method = RequestMethod.GET)
 	public ModelAndView accessoriesPage(ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/index");
-		List<Product> listProduct = new ArrayList<>(); 
+		List<Product> listProduct = new ArrayList<>();
 		listProduct = productDAO.getOther();
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/category/{id}", method = RequestMethod.GET)
 	public ModelAndView getProductByCategoryID(@PathVariable("id") int id, ModelMap modelmap) {
 		ModelAndView mav = new ModelAndView("client/product/index");
-		List<Product> listProduct = new ArrayList<>(); 
+		List<Product> listProduct = new ArrayList<>();
 		listProduct = productDAO.getByCateID(id);
 		modelmap.addAttribute("listProduct", listProduct);
 		return mav;
@@ -151,25 +146,27 @@ public class HomeController {
 	 * 
 	 * >>>>>>> 3fa268643ded1dc3841fc05e2f59d1e8ac515664
 	 */
-  //-----------------------------------------------------------View cart---------------------------------------------------------
-  	@GetMapping("views")
-  	public String viewCarts(Model model, HttpSession session) {
-  		
-  		if (session.getAttribute("userSession") != null) {
-	    	User loggedInUser = (User) session.getAttribute("userSession");
+	// -----------------------------------------------------------View
+	// cart---------------------------------------------------------
+	@GetMapping("views")
+	public String viewCarts(Model model, HttpSession session) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
 				return "redirect:/home";
 			} else {
 				model.addAttribute("CART_ITEMS", cartItemDAO.getAllItemsByUserID(loggedInUser.getId()));
-		  		model.addAttribute("TOTAL_PRICE", cartItemDAO.getAmount(loggedInUser.getId()));
-		  		
-		  		return "./client/cart-items";
+				model.addAttribute("TOTAL_PRICE", cartItemDAO.getAmount(loggedInUser.getId()));
+
+				return "./client/cart-items";
 			}
-    	}
-  		return "./client/users/login";
-  	}
-    
-  //-----------------------------------------------------------Add cart---------------------------------------------------------	
+		}
+		return "./client/users/login";
+	}
+
+	// -----------------------------------------------------------Add
+	// cart---------------------------------------------------------
 //  	@GetMapping("add/{id}")
 //  	public String addCart(@PathVariable("id") Integer id, Model model, HttpSession session) {
 //  		
@@ -195,234 +192,261 @@ public class HomeController {
 //  		return "./client/users/login";
 //  		
 //  	}
-    @PostMapping("/addtoCart")
-    public String addtoCart(@ModelAttribute("cart_items") CartItem cartItem,RedirectAttributes redirectAttributes) {
-    	int prod_id = cartItem.getProd_id();
-    	cartItemDAO.add(cartItem);		     
-    	redirectAttributes.addFlashAttribute("status", "Add to cart successfully");
-        return "redirect:/info/" + prod_id;
-    }
-  //-----------------------------------------------------------Clear cart---------------------------------------------------------
-  	@GetMapping("clear")
-  	public String clearCart(HttpSession session) {
-  		
-  		if (session.getAttribute("userSession") != null) {
-	    	User loggedInUser = (User) session.getAttribute("userSession");
+	@PostMapping("/addtoCart")
+	public String addtoCart(@ModelAttribute("cart_items") CartItem cartItem, RedirectAttributes redirectAttributes) {
+		int prod_id = cartItem.getProd_id();
+		cartItemDAO.add(cartItem);
+		redirectAttributes.addFlashAttribute("status", "Add to cart successfully");
+		return "redirect:/info/" + prod_id;
+	}
+
+	// -----------------------------------------------------------Clear
+	// cart---------------------------------------------------------
+	@GetMapping("clear")
+	public String clearCart(HttpSession session) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
 				return "redirect:/home";
 			} else {
 				cartItemDAO.clear(loggedInUser.getId());
-		  		return "redirect:/views";
+				return "redirect:/views";
 			}
-    	}
-  		return "./client/users/login";
-  		
-  	}
-  	
-  //-----------------------------------------------------------Remove cart item---------------------------------------------------------
-  		@GetMapping("delete/{id}")
-  		public String removeCart(@PathVariable("id") Integer id, HttpSession session) {
-  			
-  			if (session.getAttribute("userSession") != null) {
-  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  				if (loggedInUser.getRole().equals("admin")) {
-  					return "redirect:/home";
-  				} else {
-  					//id là idProd
-  					cartItemDAO.remove(id, loggedInUser.getId());
-  		  			return "redirect:/views";
-  				}
-  	    	}
-  	  		return "./client/users/login";
-  			
-  		}
-  //-----------------------------------------------------------Update quantity item---------------------------------------------------------
-  		@PostMapping("update")
-  		public String update(@RequestParam("id") Integer id, @RequestParam("qty") Integer qty, Integer user_id, HttpSession session) {
-  			
-  			if (session.getAttribute("userSession") != null) {
-  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  		    	user_id = loggedInUser.getId();
-  		    	System.out.println(user_id);
-  				if (loggedInUser.getRole().equals("admin")) {
-  					return "redirect:/home";
-  				} else {
-  					cartItemDAO.updateQty(id, qty, user_id);
-  		  			return "redirect:/views";
-  				}
-  	    	}
-  	  		return "./client/users/login";
-  			
-  		}
-  		
-  	//-----------------------------------------------------------Checkout views----------------------------------------------------------------------		
-  			@GetMapping("checkout")
-  			public String checkOut(HttpSession session, Model model) {
-  				
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					return "redirect:/home";
-  	  				} else {
-	  	  				int id = (int) session.getAttribute("idUser");
-	  	    			model.addAttribute("TOTAL_PRICE", cartItemDAO.getAmount(loggedInUser.getId()));
-	  	    			
-	  	    			User foundUser = userDAO.getUserById(id);
-	  	    			model.addAttribute("users", foundUser);
-	  	    			
-	  	    			return "./client/check-out";
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  		}
-  	//-----------------------------------------------------------Checkout confirm----------------------------------------------------------------------
-  			@PostMapping("confirmCheckout")
-  			public String confirmCheckout(@RequestParam("email") String email,  
-  					@RequestParam("name") String name,
-  					@RequestParam("phone") String phone,
-  					@RequestParam("address") String address, 
-  					@RequestParam("totalPrice") double totalPrice, HttpSession session, RedirectAttributes redirectAttributes) {
-  				
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					return "redirect:/home";
-  	  				} else {
-  	  					//id của user đang login vào trang
-  	    				int idUser = (int) session.getAttribute("idUser");
-  	    				
-  	    				//tạo unique id cho order
-  	    				String id = UUID.randomUUID().toString();
-  	    				
-  	    				Order order = new Order();
-  	    				order.setId(id);
-  	    				order.setUserID(idUser);
-  	    				order.setName(name);
-  	    				order.setEmail(email);
-  	    				order.setPhone(phone);
-  	    				order.setAddress(address);
-  	    				order.setPaymentMode("Cash");
-  	    				order.setStatus(0);
-  	    				order.setTotalPrice(totalPrice);
-  	    				orderDAO.saveOrder(order);
-  	    				
-  	    				for (CartItem item:cartItemDAO.getAllItemsByUserID(loggedInUser.getId())) {
-  	    					OrderItem orderItem = new OrderItem();
-  	    					orderItem.setProductID(item.getProd_id());    
-  	    					orderItem.setOrderID(id);
-  	    					orderItem.setPrice(item.getPrice());
-  	    					orderItem.setOrderItemQty(item.getQty());
-  	    					orderItemDAO.saveOrderItem(orderItem);
-  	    					
-  	    					//số lượng product trước khi bán
-  	    					int qtyProd = productDAO.getProductById(item.getProd_id()).getQuantity();
-  	    					
-  	    					//cập nhật lại số lượng product sau khi bán
-  	    					Product prod = new Product();
-  	    					prod.setQuantity(qtyProd - item.getQty());
-  	    					prod.setId(item.getProd_id());
-  	    					productDAO.updateProductAfterSelling(prod);
-  	    				}
-  	    				//clear cart khi đã check out xong
-  	    				cartItemDAO.clear(loggedInUser.getId());
-  	    				
-  	    				redirectAttributes.addFlashAttribute("status", "Check out successfully");
-  	    				return "redirect:/checkout";
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  			}
-  			
-  		//-------------------------------------------History view (history customer view)---------------------------------------------------------------------
-  			@RequestMapping(value = "/historyUser", method = RequestMethod.GET)
-  		    public String getAllHistoryByUserID(ModelMap modelMap, HttpSession session) {
-  				
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					return "redirect:/home";
-  	  				} else {  			
-	  	    			modelMap.addAttribute("userhistory", session.getAttribute("USERNAME"));
-	  				    modelMap.addAttribute("OrderHistory", orderDAO.getAllOrderByUserID(loggedInUser.getId()));
-	  				    
-	  				    return "./client/history/history"; 
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  		    		
-  		    }
-  		//------------------------------------------Detail history (Detail history customer view)--------------------------------------------------------------------------		
-  			@RequestMapping(value = "/detailHistoryUser/{orderID}", method = RequestMethod.GET)
-  		    public String getItemReceiptAdmin(ModelMap modelMap, HttpSession session, @PathVariable String orderID) {
-  					
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					return "redirect:/home";
-  	  				} else {  			
+		}
+		return "./client/users/login";
 
-	  	    			modelMap.addAttribute("OrderHistory", orderDAO.getAllOrderByUserID(loggedInUser.getId()));
-	  					modelMap.addAttribute("AllOrderItemHistory", orderItemDAO.getAllOrderItemByOrderID(orderID));
-	  				    
-	  				    return "./client/history/history-detail"; 
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  		    }
-  			
-  		//---------------------------------------------------Admin view history of each user--------------------------------------------------------------------------		
-  			@RequestMapping(value = "/getAllOrderAdmin", method = RequestMethod.GET)
-  		    public String getAllOrderAdmin(ModelMap modelMap, HttpSession session) {
-  				
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					
-	  	  				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrder()) 
-	  	  						.addAttribute("Income",orderItemDAO.getIncome());
-	  	  				
-  	  					return "./admin/history/history";
-  	  				} else {  			
-	  				    return "redirect:/clienthome"; 
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  		    }
-  			
-  		//------------------------------------------Detail Order (Detail Order Admin view)--------------------------------------------------------------------------		
-  			@RequestMapping(value = "/detailOrderUserByAdmin/{orderID}", method = RequestMethod.GET)
-  		    public String detailOrderUserByAdmin(ModelMap modelMap, HttpSession session, @PathVariable String orderID) {
-  					
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					
-	  	  				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrderByUserID(loggedInUser.getId()));
-	  					modelMap.addAttribute("AllOrderItemHistory", orderItemDAO.getAllOrderItemByOrderID(orderID));
-	  	  				return "./admin/history/history-detail";
-  	  				} else {  			
-  	  					return "redirect:/clienthome";
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  		    }
-  			
-  		//--------------------update status order--------------------------------------
-  			@RequestMapping(value = "/UpdateStatusOrder/{orderID}", method = RequestMethod.GET)
-  		    public String UpdateStatusOrder(ModelMap modelMap, HttpSession session, @PathVariable String orderID,
-  		    		RedirectAttributes redirectAttributes) {
-  				
-  				if (session.getAttribute("userSession") != null) {
-  	  		    	User loggedInUser = (User) session.getAttribute("userSession");
-  	  				if (loggedInUser.getRole().equals("admin")) {
-  	  					
-	  	  				orderDAO.saveStatus(orderID);
-	  	  				redirectAttributes.addFlashAttribute("status", "Update status successfully");
-  	  					return "redirect:/getAllOrderAdmin";
-  	  				} else {  			
-	  				    return "redirect:/clienthome"; 
-  	  				}
-  	  	    	}
-  	  	  		return "./client/users/login";
-  		    }
+	}
+
+	// -----------------------------------------------------------Remove cart
+	// item---------------------------------------------------------
+	@GetMapping("delete/{id}")
+	public String removeCart(@PathVariable("id") Integer id, HttpSession session) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				return "redirect:/home";
+			} else {
+				// id là idProd
+				cartItemDAO.remove(id, loggedInUser.getId());
+				return "redirect:/views";
+			}
+		}
+		return "./client/users/login";
+
+	}
+
+	// -----------------------------------------------------------Update quantity
+	// item---------------------------------------------------------
+	@PostMapping("update")
+	public String update(@RequestParam("id") Integer id, @RequestParam("qty") Integer qty, Integer user_id,
+			HttpSession session) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			user_id = loggedInUser.getId();
+			System.out.println(user_id);
+			if (loggedInUser.getRole().equals("admin")) {
+				return "redirect:/home";
+			} else {
+				cartItemDAO.updateQty(id, qty, user_id);
+				return "redirect:/views";
+			}
+		}
+		return "./client/users/login";
+
+	}
+
+	// -----------------------------------------------------------Checkout
+	// views----------------------------------------------------------------------
+	@GetMapping("checkout")
+	public String checkOut(HttpSession session, Model model) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				return "redirect:/home";
+			} else {
+				int id = (int) session.getAttribute("idUser");
+				model.addAttribute("TOTAL_PRICE", cartItemDAO.getAmount(loggedInUser.getId()));
+
+				User foundUser = userDAO.getUserById(id);
+				model.addAttribute("users", foundUser);
+
+				return "./client/check-out";
+			}
+		}
+		return "./client/users/login";
+	}
+
+	// -----------------------------------------------------------Checkout
+	// confirm----------------------------------------------------------------------
+	@PostMapping("confirmCheckout")
+	public String confirmCheckout(@RequestParam("email") String email, @RequestParam("name") String name,
+			@RequestParam("phone") String phone, @RequestParam("address") String address,
+			@RequestParam("totalPrice") double totalPrice, HttpSession session, RedirectAttributes redirectAttributes) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				return "redirect:/home";
+			} else {
+				// id của user đang login vào trang
+				int idUser = (int) session.getAttribute("idUser");
+
+				// tạo unique id cho order
+				String id = UUID.randomUUID().toString();
+
+				Order order = new Order();
+				order.setId(id);
+				order.setUserID(idUser);
+				order.setName(name);
+				order.setEmail(email);
+				order.setPhone(phone);
+				order.setAddress(address);
+				order.setPaymentMode("Cash");
+				order.setStatus(0);
+				order.setTotalPrice(totalPrice);
+				orderDAO.saveOrder(order);
+
+				for (CartItem item : cartItemDAO.getAllItemsByUserID(loggedInUser.getId())) {
+					OrderItem orderItem = new OrderItem();
+					orderItem.setProductID(item.getProd_id());
+					orderItem.setOrderID(id);
+					orderItem.setPrice(item.getPrice());
+					orderItem.setOrderItemQty(item.getQty());
+					orderItemDAO.saveOrderItem(orderItem);
+
+					// số lượng product trước khi bán
+					int qtyProd = productDAO.getProductById(item.getProd_id()).getQuantity();
+
+					// cập nhật lại số lượng product sau khi bán
+					Product prod = new Product();
+					prod.setQuantity(qtyProd - item.getQty());
+					prod.setId(item.getProd_id());
+					productDAO.updateProductAfterSelling(prod);
+				}
+				// clear cart khi đã check out xong
+				cartItemDAO.clear(loggedInUser.getId());
+
+				redirectAttributes.addFlashAttribute("status", "Check out successfully");
+				return "redirect:/checkout";
+			}
+		}
+		return "./client/users/login";
+	}
+
+	// -------------------------------------------History view (history customer
+	// view)---------------------------------------------------------------------
+	@RequestMapping(value = "/historyUser", method = RequestMethod.GET)
+	public String getAllHistoryByUserID(ModelMap modelMap, HttpSession session) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				return "redirect:/home";
+			} else {
+				modelMap.addAttribute("userhistory", session.getAttribute("USERNAME"));
+				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrderByUserID(loggedInUser.getId()));
+
+				return "./client/history/history";
+			}
+		}
+		return "./client/users/login";
+
+	}
+
+	// ------------------------------------------Detail history (Detail history
+	// customer
+	// view)--------------------------------------------------------------------------
+	@RequestMapping(value = "/detailHistoryUser/{orderID}", method = RequestMethod.GET)
+	public String getItemReceiptAdmin(ModelMap modelMap, HttpSession session, @PathVariable String orderID) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+				return "redirect:/home";
+			} else {
+
+				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrderByUserID(loggedInUser.getId()));
+				modelMap.addAttribute("AllOrderItemHistory", orderItemDAO.getAllOrderItemByOrderID(orderID));
+
+				return "./client/history/history-detail";
+			}
+		}
+		return "./client/users/login";
+	}
+
+	// ---------------------------------------------------Admin view history of each
+	// user--------------------------------------------------------------------------
+	@RequestMapping(value = "/getAllOrderAdmin", method = RequestMethod.GET)
+	public String getAllOrderAdmin(ModelMap modelMap, HttpSession session) {
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+
+				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrder()).addAttribute("Income",
+						orderItemDAO.getIncomeByDate(null, null));
+
+				return "./admin/history/history";
+			} else {
+				return "redirect:/clienthome";
+			}
+		}
+		return "./client/users/login";
+	}
+
+	@PostMapping(value = "searchIncome")
+	public String searchIncome(@RequestParam("startdate") String startdate, @RequestParam("enddate") String enddate,
+			ModelMap modelMap, HttpSession session) {
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");			
+			if (loggedInUser.getRole().equals("admin")) {
+				modelMap.addAttribute("Income", orderItemDAO.getIncomeByDate(startdate, enddate));
+				return "./admin/history/history";
+			} else {
+				return "redirect:/clienthome";
+			}
+		}
+		return "./client/users/login";
+	}
+
+	// ------------------------------------------Detail Order (Detail Order Admin
+	// view)--------------------------------------------------------------------------
+	@RequestMapping(value = "/detailOrderUserByAdmin/{orderID}", method = RequestMethod.GET)
+	public String detailOrderUserByAdmin(ModelMap modelMap, HttpSession session, @PathVariable String orderID) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+
+				modelMap.addAttribute("OrderHistory", orderDAO.getAllOrderByUserID(loggedInUser.getId()));
+				modelMap.addAttribute("AllOrderItemHistory", orderItemDAO.getAllOrderItemByOrderID(orderID));
+				return "./admin/history/history-detail";
+			} else {
+				return "redirect:/clienthome";
+			}
+		}
+		return "./client/users/login";
+	}
+
+	// --------------------update status order--------------------------------------
+	@RequestMapping(value = "/UpdateStatusOrder/{orderID}", method = RequestMethod.GET)
+	public String UpdateStatusOrder(ModelMap modelMap, HttpSession session, @PathVariable String orderID,
+			RedirectAttributes redirectAttributes) {
+
+		if (session.getAttribute("userSession") != null) {
+			User loggedInUser = (User) session.getAttribute("userSession");
+			if (loggedInUser.getRole().equals("admin")) {
+
+				orderDAO.saveStatus(orderID);
+				redirectAttributes.addFlashAttribute("status", "Update status successfully");
+				return "redirect:/getAllOrderAdmin";
+			} else {
+				return "redirect:/clienthome";
+			}
+		}
+		return "./client/users/login";
+	}
 }
