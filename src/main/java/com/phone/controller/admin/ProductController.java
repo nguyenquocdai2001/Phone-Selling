@@ -30,15 +30,9 @@ import com.phone.model.Category;
 @Controller(value = "productControllerOfAdmin")
 public class ProductController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
-	CateDAO category = (CateDAO) context.getBean("CateDAOImpl");
-	ProductDAO product = (ProductDAO) context.getBean("ProductDAOImpl");
+	CateDAO cateDAO = (CateDAO) context.getBean("CateDAOImpl");
+	ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAOImpl");
 
-    @Autowired
-	@Lazy
-    private ProductDAO productDAO;
-    @Autowired
-	@Lazy
-    private CateDAO cateDAO;
 	@Autowired
 	private ServletContext servletContext;
 

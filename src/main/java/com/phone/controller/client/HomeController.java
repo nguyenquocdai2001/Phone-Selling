@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,11 +24,6 @@ import com.phone.DAO.OrderDAO;
 import com.phone.DAO.OrderItemDAO;
 import com.phone.DAO.ProductDAO;
 
-import com.phone.DAO.RatingDAO;
-import com.phone.DAO.UserDAO;
-import com.phone.model.Product;
-import com.phone.model.Rate_prod;
-import com.phone.model.Review;
 import com.phone.DAO.UserDAO;
 import com.phone.model.Product;
 import com.phone.model.User;
@@ -52,7 +45,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/clienthome", method = RequestMethod.GET)
 	public ModelAndView homePage(ModelMap modelmap, HttpSession session) {
-
 		if (session.getAttribute("userSession") != null) {
 			User loggedInUser = (User) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
@@ -403,8 +395,8 @@ public class HomeController {
 		if (session.getAttribute("userSession") != null) {
 			User loggedInUser = (User) session.getAttribute("userSession");			
 			if (loggedInUser.getRole().equals("admin")) {
-				modelMap.addAttribute("Income", orderItemDAO.getIncomeByDate(startdate, enddate));
-				return "./admin/history/history";
+				modelMap.addAttribute("Income", orderItemDAO.getIncomeByDate(startdate, enddate));				
+				return "./admin/history/action";
 			} else {
 				return "redirect:/clienthome";
 			}

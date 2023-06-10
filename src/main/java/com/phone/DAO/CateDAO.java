@@ -16,5 +16,5 @@ public interface CateDAO {
     public Category getCategoryByID(int id);
     public void updateCategory(Category category);
     public void deleteCategory(int id);
-    public void upLoadImage(String imageName, String path,MultipartFile  file);
+    
 }

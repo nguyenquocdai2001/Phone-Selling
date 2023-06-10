@@ -29,13 +29,8 @@ import com.phone.validator.valid;
 public class UserController {
 
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
-
-	UserDAO client = (UserDAO) context.getBean("UserDAOImpl");
+	UserDAO userDAO = (UserDAO) context.getBean("UserDAOImpl");
 	CartItemDAO cartItemDAO = (CartItemDAO) context.getBean("CartItemDAOImpl");
-
-	@Autowired
-	@Lazy
-	private UserDAO userDAO;
 
 	@RequestMapping(value = "/homepage", method = RequestMethod.GET)
 	public ModelAndView homePage() {

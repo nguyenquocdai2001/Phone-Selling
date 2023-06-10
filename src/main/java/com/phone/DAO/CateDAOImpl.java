@@ -107,24 +107,6 @@ public class CateDAOImpl implements CateDAO {
 
 	}
 
-	@Override
-	public void upLoadImage(String nameFile, String dirFile, MultipartFile file) {
-		System.out.println(dirFile);
-		File fileDir = new File(dirFile);
-		if (!fileDir.exists()) {
-			fileDir.mkdir();
-		}
-		try {
-			// commonsMultipartFiles.transferTo(new File(fileDir+File.separator+nameFile));
-			File savedFile = new File(fileDir + File.separator + nameFile);
-			file.transferTo(savedFile);
-			System.out.println("Upload file thành công!");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			System.out.println("Upload file thất bại!");
-		}
-
-	}
 
 	@Override
 	public List<Category> getLimitCategory() {

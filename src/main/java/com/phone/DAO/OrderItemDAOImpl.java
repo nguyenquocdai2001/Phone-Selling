@@ -77,9 +77,10 @@ public class OrderItemDAOImpl implements OrderItemDAO{
 	public OrderItem checkOrder(int user_id, int prod_id) {
 		OrderItem orderItem = null;
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement("SELECT r.*"
+				PreparedStatement preparedStatement = connection.prepareStatement("SELECT top 1 r.*"
 						+ "FROM order_details r "
-						+ "JOIN orders p ON r.order_id = p.id where p.user_id = ? and r.prod_id= ?")) {
+						+ "JOIN orders p ON r.order_id = p.id where p.user_id = ? and r.prod_id= ? "
+						+ "ORDER BY ID DESC")) {
 			preparedStatement.setInt(1, user_id);
 			preparedStatement.setInt(2, prod_id);
 			try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -91,7 +92,6 @@ public class OrderItemDAOImpl implements OrderItemDAO{
 	            	orderItem.setOrderItemQty(resultSet.getInt("qty"));	
 	            	orderItem.setPrice(resultSet.getDouble("price"));
 	            	orderItem.setCreated_at(resultSet.getString("created_at"));          	
-	            	System.out.println("get item order thanh cong");
 				}
 			}
 		} catch (SQLException e) {

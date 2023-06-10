@@ -84,12 +84,18 @@
 									<h4 class="card-title">Monthly Income</h4>
 									<p class="card-category">List of monthly income</p>
 								</div>
-								<form id="searchForm" action="${pageContext.request.contextPath}/searchIncome"
+								<form id="searchForm"
+									action="${pageContext.request.contextPath}/searchIncome"
 									method="POST">
 									<div class="card-body table-full-width table-responsive">
-									<input type="date" name="startdate">
-									<input type="date" name="enddate">
-									<button class="rounded" type="submit" onclick="searchIncome()"><i class="fa fa-search"></i>Search</button>
+										<input  type="date" name="startdate"> <input
+											type="date" name="enddate">
+										<button class="rounded" type="button" onclick="searchIncome()">
+											<i class="fa fa-search"></i>Search
+										</button>
+										<div>
+											<canvas id="myChart"> </canvas>
+										</div>
 										<table
 											class="table table-striped table-borderless table-hover "
 											id="Income">
@@ -101,13 +107,15 @@
 												</tr>
 											</thead>
 											<tbody>
+												<c:set var="sum" value="0" />
 												<c:forEach var="order" items="${Income}" varStatus="loop">
 													<tr>
 														<td>${order.created_at}</td>
 														<td><fmt:formatNumber value="${order.price}"
 																type="number" /></td>
 													</tr>
-												</c:forEach>
+													<c:set var="sum" value="${sum + order.price}" />
+												</c:forEach>																									
 											</tbody>
 										</table>
 									</div>
@@ -115,9 +123,7 @@
 							</div>
 						</div>
 					</div>
-					<div>
-						<canvas id="myChart"> </canvas>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -127,37 +133,83 @@
 </body>
 
 <%@ include file="/common/admin/script.jsp"%>
-
 <c:if test="${not empty status}">
 	<script>
 		swal("${status}");
 	</script>
 </c:if>
+
 <script>
-    const ctx = document.getElementById('myChart');
+  const ctx = document.getElementById('myChart');
+  var chart = null; 
+    function searchIncome() {
+        var startdate = document.getElementsByName("startdate")[0].value;
+        var enddate = document.getElementsByName("enddate")[0].value;
 
-    // Lấy dữ liệu từ biến Income và chuyển đổi thành các mảng
-    const incomeLabels = [<c:forEach var="order" items="${Income}" varStatus="loop">${loop.index > 0 ? ',' : ''}'${order.created_at}'</c:forEach>];
-    const incomeData = [<c:forEach var="order" items="${Income}" varStatus="loop">${loop.index > 0 ? ',' : ''}${order.price}</c:forEach>];
+        fetch("${pageContext.request.contextPath}/searchIncome", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "startdate=" + startdate + "&enddate=" + enddate
+        })
+        .then(function(response) {
+            return response.text();
+        })
+        .then(function(data) {
+            var incomeTable = document.getElementById("Income");
+            incomeTable.getElementsByTagName("tbody")[0].innerHTML = data;          
+            updateChart(); // Cập nhật biểu đồ sau khi nhận kết quả tìm kiếm
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+    }
 
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: incomeLabels,
-        datasets: [{
-          label: 'Total income',
-          data: incomeData,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
+   // Khởi tạo biến chart là null
+
+    function updateChart() {
+      if (chart) {
+        chart.destroy();  // Huỷ bỏ biểu đồ hiện tại nếu tồn tại
+      }
+
+      var incomeLabels = [];
+      var incomeData = [];
+
+      // Lấy dữ liệu từ bảng và chuyển đổi thành các mảng
+      $("#Income tbody tr").each(function() {
+        var label = $(this).find("td:first-child").text();
+        var data = $(this).find("td:last-child").text();
+
+        incomeLabels.push(label);
+        incomeData.push(parseFloat(data));
+      });
+
+      // Tạo biểu đồ mới trên canvas
+      chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: incomeLabels,
+          datasets: [{
+            label: 'Total income',
+            data: incomeData,
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
+      });
+    }
+ // A $( document ).ready() block.
+    $( document ).ready(function() {
+    	updateChart();
     });
-    
-  </script>
+</script>
+
+
 </html>

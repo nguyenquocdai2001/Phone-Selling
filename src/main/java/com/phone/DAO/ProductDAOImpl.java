@@ -19,7 +19,6 @@ public class ProductDAOImpl implements ProductDAO {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
 	DataSource dataSource = (DataSource) context.getBean("myDataSource");
 
-	
 	@Override
 	public void addProduct(Product product) {
 		try (Connection connection = dataSource.getConnection();

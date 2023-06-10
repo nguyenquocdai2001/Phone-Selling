@@ -33,16 +33,8 @@ import com.phone.model.Product;
 @Controller(value = "homeControllerOfAdmin")
 public class CategoryController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("IoC.xml");
-
-	CateDAO category = (CateDAO) context.getBean("CateDAOImpl");
-	ProductDAO product = (ProductDAO) context.getBean("ProductDAOImpl");
-
-	@Autowired
-	@Lazy
-	private CateDAO cateDAO;
-	@Autowired
-	@Lazy
-	private ProductDAO productDAO;
+	CateDAO cateDAO = (CateDAO) context.getBean("CateDAOImpl");
+	ProductDAO productDAO = (ProductDAO) context.getBean("ProductDAOImpl");
 
 	@Autowired
 	private ServletContext servletContext;
