@@ -45,7 +45,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/clienthome", method = RequestMethod.GET)
 	public ModelAndView homePage(ModelMap modelmap, HttpSession session) {
-		if (session.getAttribute("userSession") != null) {
+	
 			User loggedInUser = (User) session.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
 				ModelAndView mav = new ModelAndView("admin/home");
@@ -59,16 +59,7 @@ public class HomeController {
 				modelmap.addAttribute("listProduct", listProduct);
 				modelmap.addAttribute("listCate", listCate);
 				return mav;
-			}
-		}
-		ModelAndView mav = new ModelAndView("client/home");
-		List<Product> listProduct = new ArrayList<>();
-		List<Category> listCate = new ArrayList<>();
-		listCate = cateDAO.getLimitCategory();
-		listProduct = productDAO.getTrendingProduct();
-		modelmap.addAttribute("listProduct", listProduct);
-		modelmap.addAttribute("listCate", listCate);
-		return mav;
+			}	
 	}
 
 	/*

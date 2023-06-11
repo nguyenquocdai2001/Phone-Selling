@@ -47,31 +47,22 @@ public class RatingController {
 	ReviewDAO reviewDAO = (ReviewDAO) context.getBean("ReviewDAOImpl");
 
 	@GetMapping("info/{id}")
-	public String showUpdateProductForm(@PathVariable("id") int id, ModelMap modelMap, HttpSession httpSession) {
-		if (httpSession.getAttribute("userSession") != null) {
+	public String infoProductForm(@PathVariable("id") int id, ModelMap modelMap, HttpSession httpSession) {
 			User loggedInUser = (User) httpSession.getAttribute("userSession");
 			if (loggedInUser.getRole().equals("admin")) {
 				return "redirect:/home";
-			} else {
+			} else {	
 				Product product = productDAO.getProductById(id);
 				List<Integer> list = ratingDAO.getRateByProductId(id);
 				List<Review> listReview = reviewDAO.getAllReview(id);
 				int rateNum = list.size();
 				double average = list.stream().mapToInt(Integer::intValue).average().orElse(0);
-				modelMap.addAttribute("product", product).addAttribute("rateNum", rateNum).addAttribute("rate", average)
+				modelMap.addAttribute("product", product)
+						.addAttribute("rateNum", rateNum)
+						.addAttribute("rate", average)
 						.addAttribute("listReview", listReview);
 				return "client/product/view";
-			}
-
-		}
-		Product product = productDAO.getProductById(id);
-		List<Integer> list = ratingDAO.getRateByProductId(id);
-		List<Review> listReview = reviewDAO.getAllReview(id);
-		int rateNum = list.size();
-		double average = list.stream().mapToInt(Integer::intValue).average().orElse(0);
-		modelMap.addAttribute("product", product).addAttribute("rateNum", rateNum).addAttribute("rate", average)
-				.addAttribute("listReview", listReview);
-		return "client/product/view";
+			}				
 	}
 
 	@PostMapping("/add-rating")
@@ -88,25 +79,17 @@ public class RatingController {
 				} else {
 					ratingDAO.updateRatingByUserId(rating);
 				}
-				redirectAttributes.addFlashAttribute("status", "Rating success");
-				String url = "/info/" + prod_id;
-				return "redirect:" + url;
+				redirectAttributes.addFlashAttribute("status", "Rating success");			
 			} else if (dateCompare(date).equals("Outvalid")) {
-
 				redirectAttributes.addFlashAttribute("status", "Fail to rating, out of range");
-				String url = "/info/" + prod_id;
-				return "redirect:" + url;
 			} else {
-				redirectAttributes.addFlashAttribute("status", "Please try it 7 day before rating");
-				String url = "/info/" + prod_id;
-				return "redirect:" + url;
+				redirectAttributes.addFlashAttribute("status", "Please try it 7 day before rating");			
 			}
-
 		} else {
-			redirectAttributes.addFlashAttribute("status", "Please try it 7 day before rating");
-			String url = "/info/" + prod_id;
-			return "redirect:" + url;
+			redirectAttributes.addFlashAttribute("status", "Please try it before rating");
 		}
+		String url = "/info/" + prod_id;
+		return "redirect:" + url;
 
 	}
 
@@ -149,7 +132,6 @@ public class RatingController {
 		long timeDiff = Math.abs(day2.getTime() - day1.getTime());
 		long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
 		if (daysDiff >= 7 && daysDiff <= 14) {
-			System.out.println(daysDiff);
 			return "Valid";
 		} else if (daysDiff >= 14) {
 			return "Outvalid";
