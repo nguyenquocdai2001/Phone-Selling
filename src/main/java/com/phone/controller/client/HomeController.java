@@ -59,7 +59,15 @@ public class HomeController {
 				modelmap.addAttribute("listProduct", listProduct);
 				modelmap.addAttribute("listCate", listCate);
 				return mav;
-			}	
+			}
+				ModelAndView mav = new ModelAndView("client/home");
+				List<Product> listProduct = new ArrayList<>();
+				List<Category> listCate = new ArrayList<>();
+				listCate = cateDAO.getLimitCategory();
+				listProduct = productDAO.getTrendingProduct();
+				modelmap.addAttribute("listProduct", listProduct);
+				modelmap.addAttribute("listCate", listCate);
+				return mav;
 	}
 
 	/*
